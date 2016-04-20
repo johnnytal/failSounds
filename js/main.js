@@ -44,75 +44,112 @@ gameMain.prototype = {
         ];
         
         button1.events.onInputDown.add(function(){
-            stopSounds();
-            sfxCricket.play();
+                if (!sfxCricket.isPlaying){
+                    stopSounds();
+                    sfxCricket.play();
+                    
+                    button1.tint = 0xaaff44;
+                    sfxCricket.onStop.add(function(){
+                       button1.tint = 0xffffff;
+                    }, this);
+                    
+                    game.stage.backgroundColor = '#000055';
+                } 
+                else{
+                    sfxCricket.stop();
+                    game.stage.backgroundColor = '#fffa6f';
+                }
+         }, this);
             
-            button1.tint = 0xaaff44;
-            sfxCricket.onStop.add(function(){
-               button1.tint = 0xffffff;
-            }, this);
             
-            game.stage.backgroundColor = '#000055';
-        }, this);
-        
         button2.events.onInputDown.add(function(){
-            stopSounds();
-            sfxDrums.play();
-            
-            button2.tint = 0xff1155;
-            sfxDrums.onStop.add(function(){
-               button2.tint = 0xffffff;
-            }, this);
-            
-            game.stage.backgroundColor = '#00ff00';
+            if (!sfxDrums.isPlaying){
+                stopSounds();
+                sfxDrums.play();
+                
+                button2.tint = 0xff1155;
+                sfxDrums.onStop.add(function(){
+                   button2.tint = 0xffffff;
+                }, this);
+                
+                game.stage.backgroundColor = '#00ff00';
+            }
+            else{
+                sfxDrums.stop();
+                game.stage.backgroundColor = '#fffa6f';
+            }
         }, this);
         
         button3.events.onInputDown.add(function(){
-            stopSounds();
-            sfxHorn.play();
-           
-            button3.tint = 0xaa55ff;
-            sfxHorn.onStop.add(function(){
-               button3.tint = 0xffffff;
-            }, this);
-            
-            game.stage.backgroundColor = '#ffff00';
+            if (!sfxHorn.isPlaying){
+                stopSounds();
+                sfxHorn.play();
+               
+                button3.tint = 0xaa55ff;
+                sfxHorn.onStop.add(function(){
+                   button3.tint = 0xffffff;
+                }, this);
+                
+                game.stage.backgroundColor = '#f3fff5';
+            }
+            else{
+                sfxHorn.stop();
+                game.stage.backgroundColor = '#fffa6f';
+            }
         }, this);
         
         button4.events.onInputDown.add(function(){
-            stopSounds();
-            sfxJaws_harp.play();
-            
-            button4.tint =  0xaa55ff;
-            sfxJaws_harp.onStop.add(function(){
-               button4.tint = 0xffffff;
-            }, this);
-            
-            game.stage.backgroundColor = '#00ffff';
+            if (!sfxJaws_harp.isPlaying){
+                stopSounds();
+                sfxJaws_harp.play();
+                
+                button4.tint =  0xaa55ff;
+                sfxJaws_harp.onStop.add(function(){
+                   button4.tint = 0xffffff;
+                }, this);
+                
+                game.stage.backgroundColor = '#00ffff';
+            }
+            else{
+                sfxJaws_harp.stop();
+                game.stage.backgroundColor = '#fffa6f';
+            }
         }, this);
         
         button5.events.onInputDown.add(function(){
-            stopSounds();
-            sfxHorror.play();
-            
-            button5.tint = 0xaaff44;
-            sfxHorror.onStop.add(function(){
-               button5.tint = 0xffffff;
-            }, this);
-            
-            game.stage.backgroundColor = '#000000';
+            if (!sfxHorror.isPlaying){
+                stopSounds();
+                sfxHorror.play();
+                
+                button5.tint = 0xaaff44;
+                sfxHorror.onStop.add(function(){
+                   button5.tint = 0xffffff;
+                }, this);
+                
+                game.stage.backgroundColor = '#000000';
+            }
+            else{
+                sfxHorror.stop();
+                game.stage.backgroundColor = '#fffa6f';
+            }
         }, this);
         
         button6.events.onInputDown.add(function(){
-            stopSounds();
-            sfxTrombone.play();
-            
-            button6.tint =  0xff1155;
-            sfxTrombone.onStop.add(function(){
-               button6.tint = 0xffffff;
-            }, this);
-            
-            game.stage.backgroundColor = '#faa00f';
+            if (!sfxTrombone.isPlaying){
+                stopSounds();
+                sfxTrombone.play();
+                
+                button6.tint =  0xff1155;
+                sfxTrombone.onStop.add(function(){
+                   button6.tint = 0xffffff;
+                }, this);
+                
+                game.stage.backgroundColor = '#faa00f';
+            }
+            else{
+                sfxTrombone.stop();
+                game.stage.backgroundColor = '#fffa6f';
+            }
         }, this);
     }
 };
