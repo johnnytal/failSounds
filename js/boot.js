@@ -1,6 +1,4 @@
 window.onload = function(){
-    font = 'Chewy';
-
     WIDTH = 850; HEIGHT = 480; 
     
     w = window.innerWidth * window.devicePixelRatio;
