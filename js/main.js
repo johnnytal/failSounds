@@ -13,8 +13,8 @@ gameMain.prototype = {
         button5 = this.add.sprite(303,235,'button');
         button6 = this.add.sprite(583,235,'button');
         
-        cricket = this.add.image(55, 100, 'cricket');
-        drums = this.add.image(335, 60, 'drums');
+        cricket = this.add.image(68, 104, 'cricket');
+        drums = this.add.image(345, 70, 'drums');
         horn = this.add.image(625, 90, 'horn');
         jaws_harp = this.add.image(65, 300, 'jaws_harp');
         mask = this.add.image(370, 255, 'mask');
