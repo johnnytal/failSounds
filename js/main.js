@@ -4,19 +4,21 @@ var gameMain = function(game){
 
 gameMain.prototype = {
     create: function(){  
-        button1 = this.add.sprite(20,20,'button');
-        button2 = this.add.sprite(220,20,'button');
-        button3 = this.add.sprite(420,20,'button');
-        button4 = this.add.sprite(20,240,'button');
-        button5 = this.add.sprite(220,240,'button');
-        button6 = this.add.sprite(420,240,'button');
+        border = this.add.image(0,0,'border');
         
-        cricket = this.add.image(50, 85, 'cricket');
-        drums = this.add.image(235, 50, 'drums');
-        horn = this.add.image(450, 90, 'horn');
-        jaws_harp = this.add.image(60, 285, 'jaws_harp');
-        mask = this.add.image(275, 250, 'mask');
-        trombone = this.add.image(465, 270, 'trombone');
+        button1 = this.add.sprite(20,15,'button');
+        button2 = this.add.sprite(303,15,'button');
+        button3 = this.add.sprite(583,15,'button');
+        button4 = this.add.sprite(20,235,'button');
+        button5 = this.add.sprite(303,235,'button');
+        button6 = this.add.sprite(583,235,'button');
+        
+        cricket = this.add.image(55, 100, 'cricket');
+        drums = this.add.image(335, 60, 'drums');
+        horn = this.add.image(625, 90, 'horn');
+        jaws_harp = this.add.image(65, 300, 'jaws_harp');
+        mask = this.add.image(370, 255, 'mask');
+        trombone = this.add.image(627, 282, 'trombone');
         
         button1.inputEnabled = true;
         button2.inputEnabled = true;

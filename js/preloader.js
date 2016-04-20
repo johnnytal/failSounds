@@ -9,6 +9,7 @@ preloader.prototype = {
         this.game.load.image("mask","assets/images/mask.png");
         this.game.load.image("trombone","assets/images/trombone.png");
         this.game.load.image("button","assets/images/button.png");
+        this.game.load.image("border","assets/images/border.png");
 
         this.game.load.audio('sfxCricket', 'assets/audio/crickets.mp3');
         this.game.load.audio('sfxDrums', 'assets/audio/drums.mp3');
