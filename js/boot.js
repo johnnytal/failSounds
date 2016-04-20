@@ -1,10 +1,8 @@
-window.onload = function(){
-    WIDTH = 850; HEIGHT = 480; 
-    
+window.onload = function(){   
     w = window.innerWidth * window.devicePixelRatio;
     h = window.innerHeight * window.devicePixelRatio;
     
-    game = new Phaser.Game(WIDTH, HEIGHT, Phaser.CANVAS, "");    
+    game = new Phaser.Game(850, 480, Phaser.CANVAS, "");    
       
     game.state.add("Boot", boot);
     game.state.add("Preloader", preloader);
@@ -14,18 +12,14 @@ window.onload = function(){
 };
 
 var boot = function(game){};
-  
 boot.prototype = {
-    preload: function(){
-
-    },
     create: function(){
         game.stage.backgroundColor = '#fffa6f';
  
         if (this.game.device.desktop){
             this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
             
-            var factor = 1.12; 
+            var factor = 1.12;
             
             this.scale.maxWidth = w / factor; 
             this.scale.maxHeight = h / factor; 
@@ -51,7 +45,4 @@ boot.prototype = {
     }
 };
 
-function onOrientationChange(){
-    
-}
-
+function onOrientationChange(){}

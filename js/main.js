@@ -114,11 +114,7 @@ gameMain.prototype = {
             
             game.stage.backgroundColor = '#faa00f';
         }, this);
-    },
-    
-    update: function(){   
-
-    },  
+    }
 };
 
 function stopSounds(){
