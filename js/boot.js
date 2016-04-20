@@ -19,7 +19,7 @@ var boot = function(game){};
   
 boot.prototype = {
     preload: function(){
-          this.game.load.image("loading", "assets/images/loading.png");
+
     },
     create: function(){
         game.stage.backgroundColor = '#fffa6f';
@@ -49,9 +49,7 @@ boot.prototype = {
             
             this.scale.setScreenSize(true);
         }
-
         game.state.start('Preloader');
-    
     }
 };
 

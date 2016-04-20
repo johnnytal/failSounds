@@ -3,12 +3,10 @@ var gameMain = function(game){
 };
 
 gameMain.prototype = {
-    create: function(){
-        
+    create: function(){  
         button1 = this.add.sprite(20,20,'button');
         button2 = this.add.sprite(220,20,'button');
         button3 = this.add.sprite(420,20,'button');
-        
         button4 = this.add.sprite(20,240,'button');
         button5 = this.add.sprite(220,240,'button');
         button6 = this.add.sprite(420,240,'button');
@@ -16,7 +14,6 @@ gameMain.prototype = {
         cricket = this.add.image(50, 85, 'cricket');
         drums = this.add.image(235, 50, 'drums');
         horn = this.add.image(450, 90, 'horn');
-        
         jaws_harp = this.add.image(60, 285, 'jaws_harp');
         mask = this.add.image(275, 250, 'mask');
         trombone = this.add.image(465, 270, 'trombone');
@@ -34,6 +31,15 @@ gameMain.prototype = {
         button4.input.useHandCursor = true;
         button5.input.useHandCursor = true;
         button6.input.useHandCursor = true;
+ 
+        sounds = [ 
+            sfxCricket = game.add.audio('sfxCricket'),
+            sfxDrums = game.add.audio('sfxDrums'),
+            sfxHorn = game.add.audio('sfxHorn'),
+            sfxHorror = game.add.audio('sfxHorror'),
+            sfxJaws_harp = game.add.audio('sfxJaws_harp'),
+            sfxTrombone = game.add.audio('sfxTrombone')
+        ];
         
         button1.events.onInputDown.add(function(){
             stopSounds();
@@ -106,15 +112,6 @@ gameMain.prototype = {
             
             game.stage.backgroundColor = '#faa00f';
         }, this);
-        
-        sounds = [ 
-            sfxCricket = game.add.audio('sfxCricket'),
-            sfxDrums = game.add.audio('sfxDrums'),
-            sfxHorn = game.add.audio('sfxHorn'),
-            sfxHorror = game.add.audio('sfxHorror'),
-            sfxJaws_harp = game.add.audio('sfxJaws_harp'),
-            sfxTrombone = game.add.audio('sfxTrombone')
-        ];
     },
     
     update: function(){   
