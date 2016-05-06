@@ -14,28 +14,16 @@ window.onload = function(){
 var boot = function(game){};
 boot.prototype = {
     create: function(){
-        game.stage.backgroundColor = '#fffa6f';
- 
-        if (this.game.device.desktop){
-            this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-            
-            var factor = 1.12;
-            
-            this.scale.maxWidth = w / factor; 
-            this.scale.maxHeight = h / factor; 
-            
-            this.game.scale.pageAlignHorizontally = true;
-        } 
-        
-        else {
-            this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        game.stage.backgroundColor = '#fffa7a';
 
-            this.scale.maxWidth = w;
-            this.scale.maxHeight = h;
-            
-            this.scale.pageAlignHorizontally = true;
-            this.scale.forceOrientation(false, true);
-        }
+        this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+
+        this.scale.maxWidth = w;
+        this.scale.maxHeight = h;
+        
+        this.scale.pageAlignHorizontally = true;
+        this.scale.forceOrientation(false, true);
+        
         game.state.start('Preloader');
     }
 };

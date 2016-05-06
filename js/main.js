@@ -144,7 +144,7 @@ gameMain.prototype = {
                    button6.tint = 0xffffff;
                 }, this);
                 
-                game.stage.backgroundColor = '#faa00f';
+                game.stage.backgroundColor = '#ffd00f';
             }
             else{
                 sfxTrombone.stop();
