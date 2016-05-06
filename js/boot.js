@@ -25,7 +25,6 @@ boot.prototype = {
             this.scale.maxHeight = h / factor; 
             
             this.game.scale.pageAlignHorizontally = true;
-            this.game.scale.setScreenSize(true);
         } 
         
         else {
@@ -36,13 +35,7 @@ boot.prototype = {
             
             this.scale.pageAlignHorizontally = true;
             this.scale.forceOrientation(false, true);
-
-            this.scale.onOrientationChange.add(onOrientationChange, this);
-            
-            this.scale.setScreenSize(true);
         }
         game.state.start('Preloader');
     }
 };
-
-function onOrientationChange(){}
