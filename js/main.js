@@ -160,7 +160,30 @@ gameMain.prototype = {
         
         var banner = Cocoon.Ad.AdMob.createBanner();
         alert(banner)
+        banner.load();
+        alert(banner)
         banner.show();
+        alert(banner)
+        
+         banner.on("load", function(){
+           alert("Banner loaded " + banner.width, banner.height);
+        });
+         
+        banner.on("fail", function(){
+           alert("Banner failed to load");
+        });
+         
+        banner.on("show", function(){
+           alert("Banner shown a modal content");
+        });
+         
+        banner.on("dismiss", function(){
+           alert("Banner dismissed the modal content");
+        });
+         
+        banner.on("click", function(){
+           alert("Banner clicked");
+        });
     }
 };
 
