@@ -159,6 +159,7 @@ gameMain.prototype = {
         });
         
         var banner = Cocoon.Ad.AdMob.createBanner();
+        alert(banner)
         banner.show();
     }
 };
