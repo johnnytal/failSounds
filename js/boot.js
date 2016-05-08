@@ -1,4 +1,6 @@
-window.onload = function(){   
+document.addEventListener("deviceready", start, false);
+
+function start(){   
     w = window.innerWidth * window.devicePixelRatio;
     h = window.innerHeight * window.devicePixelRatio;
     

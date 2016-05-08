@@ -151,6 +151,15 @@ gameMain.prototype = {
                 game.stage.backgroundColor = '#fffa6f';
             }
         }, this);
+        
+        Cocoon.Ad.AdMob.configure({
+             android: {
+                  banner:"ca-app-pub-9795366520625065/3578360636"
+             }
+        });
+        
+        var banner = Cocoon.Ad.AdMob.createBanner();
+        banner.show();
     }
 };
 
