@@ -1,6 +1,5 @@
 var gameMain = function(game){
     var sounds;
-    var inter;
     var banner;
     
     playModes = ['toggle', 'trigger', 'gate', 'pause', 'none'];
@@ -101,18 +100,14 @@ gameMain.prototype = {
         } 
         
         Cocoon.Ad.AdMob.configure({
-             android: {
-                  inter:"ca-app-pub-9795366520625065/1704674634", 
+             android: { 
                   banner:"ca-app-pub-9795366520625065/3578360636"
              }
         });
         
-        inter = Cocoon.Ad.AdMob.createBanner();
-        inter.load();  
-        
         banner = Cocoon.Ad.AdMob.createBanner();
         banner.load();  
-        banner.show();  
+         
     }
 };
 
@@ -270,15 +265,14 @@ function openOptions(){
                 type: "image", content: "ok", offsetY: 120, contentScale: 0.35,
                 callback: function () {
                     modal.hideModal('options');
-                    var random = game.rnd.integerInRange(0,3);
-                    if (random == 0) inter.show();
-                    else if (random == 1) rateUs();
+                    banner.hide(); 
                 }
             },
         ]
    });
    
    modal.showModal("options"); 
+   banner.show(); 
    
    if (mode == 'toggle') modal.getModalItem('options',4).tint = 0x00ff00;
    else if (mode == 'trigger') modal.getModalItem('options',5).tint = 0x00ff00;
