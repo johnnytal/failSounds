@@ -1,5 +1,7 @@
 var gameMain = function(game){
     var sounds;
+    var inter;
+    var banner;
     
     playModes = ['toggle', 'trigger', 'gate', 'pause', 'none'];
     mode = playModes[0];
@@ -96,7 +98,21 @@ gameMain.prototype = {
             buttons[b].events.onInputUp.add(function(){
                 if (mode == 'gate') stopSounds();
             }, this);  
-        }     
+        } 
+        
+        Cocoon.Ad.AdMob.configure({
+             android: {
+                  inter:"ca-app-pub-9795366520625065/1704674634", 
+                  banner:"ca-app-pub-9795366520625065/3578360636"
+             }
+        });
+        
+        inter = Cocoon.Ad.AdMob.createBanner();
+        inter.load();  
+        
+        banner = Cocoon.Ad.AdMob.createBanner();
+        banner.load();  
+        banner.show();  
     }
 };
 
@@ -255,7 +271,7 @@ function openOptions(){
                 callback: function () {
                     modal.hideModal('options');
                     var random = game.rnd.integerInRange(0,3);
-                    if (random == 0) showAd('show');
+                    if (random == 0) inter.show();
                     else if (random == 1) rateUs();
                 }
             },
@@ -294,22 +310,6 @@ function changeTimer(_time, btn){
         modal.getModalItem('options', n).tint = 0xffffff;
     } 
     btn.tint = 0x00ff00;
-}
-
-function showAd(){
-    var inter;
-
-    Cocoon.Ad.AdMob.configure({
-         android: {
-              inter:"ca-app-pub-9795366520625065/1704674634"
-         }
-    });
-    
-    inter = Cocoon.Ad.AdMob.createBanner();
-
-    inter.load();
-    
-    inter.show();   
 }
 
 function rateUs(){
