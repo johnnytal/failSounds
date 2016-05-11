@@ -156,7 +156,7 @@ function openOptions(){
             {
                 type: "text", content: "Toggle", fontSize: 20, color: "0xFEFF49",
                 stroke: "0x000000", strokeThickness: 4,
-                offsetY: -120, offsetX: -150,
+                offsetY: -120, offsetX: -180,
                 callback: function () {
                     changePlayMode(playModes[0], this);         
                 }
@@ -169,7 +169,7 @@ function openOptions(){
                 stroke: "0x000000",
                 strokeThickness: 4,
                 offsetY: -120,
-                offsetX: -70,
+                offsetX: -85,
                 callback: function () {
                     changePlayMode(playModes[1], this);
                 }
@@ -182,7 +182,7 @@ function openOptions(){
                 stroke: "0x000000",
                 strokeThickness: 4,
                 offsetY: -120,
-                offsetX: 10,
+                offsetX: 0,
                 callback: function () {
                     changePlayMode(playModes[2], this);
                 }
@@ -208,7 +208,7 @@ function openOptions(){
                 stroke: "0x000000",
                 strokeThickness: 4,
                 offsetY: -120,
-                offsetX: 170,
+                offsetX: 180,
                 callback: function () {
                     changePlayMode(playModes[4], this);
                 }
@@ -218,7 +218,7 @@ function openOptions(){
                 stroke: "0x000000", strokeThickness: 5
             },
             {
-                type: "text", content: "12", fontSize: 24, color: "0xFEFF49",
+                type: "text", content: "12s", fontSize: 24, color: "0xFEFF49",
                 offsetY: 0, offsetX: 100,
                 stroke: "0x000000", strokeThickness: 3,                     
                 callback: function () {
@@ -226,7 +226,7 @@ function openOptions(){
                 }
             },
             {
-                type: "text", content: "7", fontSize: 24, color: "0xFEFF49",
+                type: "text", content: "7s", fontSize: 24, color: "0xFEFF49",
                 offsetY: 0, offsetX: 33,
                 stroke: "0x000000", strokeThickness: 3,                     
                 callback: function () {
@@ -234,7 +234,7 @@ function openOptions(){
                 }
             },
             {
-                type: "text", content: "3", fontSize: 24, color: "0xFEFF49",
+                type: "text", content: "3s", fontSize: 24, color: "0xFEFF49",
                 offsetY: 0, offsetX: -33,
                 stroke: "0x000000", strokeThickness: 3, 
                 callback: function () {
@@ -242,7 +242,7 @@ function openOptions(){
                 }
             },
              {
-                type: "text", content: "0", fontSize: 24, color: "0xFEFF49",
+                type: "text", content: "0s", fontSize: 24, color: "0xFEFF49",
                 offsetY: 0, offsetX: -100,
                 stroke: "0x000000", strokeThickness: 3, 
                 callback: function () {
