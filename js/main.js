@@ -266,6 +266,7 @@ function openOptions(){
                 callback: function () {
                     modal.hideModal('options');
                     banner.hide(); 
+                    rateUs();
                 }
             },
         ]
@@ -308,20 +309,12 @@ function changeTimer(_time, btn){
 
 function rateUs(){
     navigator.notification.confirm(
-    'If you enjoy using FailSounds, whould you mind taking a moment to rate it? It won\'t take more than a minute. Thanks for your support!',
+    'I ask for so little... would you rate my app now?...',
     
     function(button){
         if (button == '1') {    // Rate Now
-            window.open('market://details?id=<package_name>');
-            this.core.rate_app = false;
+            window.open('market://details?id=com.com.johnnytal_failSounds');
         } 
-        
-        else if (button == '2') { // Later
-            this.core.rate_app_counter = 0;
-        } 
-        
-        else if (button == '3') { // No
-            this.core.rate_app = false;
-        }
-    }, 'Rate domainsicle', ['Rate domainsicle', 'Remind me later', 'No Thanks']);   
+
+    }, 'Rate domainsicle', ['Rate now!', 'No Thanks']);   
 }
