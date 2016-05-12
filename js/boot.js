@@ -1,4 +1,5 @@
 document.addEventListener("deviceready", start, false);
+//window.onload = start;
 
 function start(){   
     w = window.innerWidth * window.devicePixelRatio;
@@ -22,9 +23,6 @@ boot.prototype = {
 
         this.scale.maxWidth = w;
         this.scale.maxHeight = h;
-        
-        this.scale.pageAlignHorizontally = true;
-        this.scale.forceOrientation(false, true);
         
         game.state.start('Preloader');
     }

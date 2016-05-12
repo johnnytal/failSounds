@@ -2,6 +2,8 @@ var gameMain = function(game){
     var sounds;
     var banner;
     
+    multiSounds = false;
+    
     playModes = ['toggle', 'trigger', 'gate', 'pause', 'none'];
     mode = playModes[0];
     
@@ -119,7 +121,7 @@ function stopSounds(){
 
 function playSound(sound, button, color1, color2){
     if (!sound.isPlaying){
-        stopSounds();
+        if (!multiSounds) stopSounds();
         
         setTimeout(function(){
             if (!sound.paused){
@@ -152,74 +154,57 @@ function playSound(sound, button, color1, color2){
 }
 
 function openOptions(){
+    optionsColor = '0x49FFFE';
+    optionsFontSize = 22;
+    
     modal.createModal({
         type:"options",
         includeBackground: true,
         modalCloseOnInput: false,
         itemsArr: [
             {
-                type: "image", content: "panel", offsetY: 0, offsetX: 0, contentScale: 1.5
+                type: "image", content: "panel", offsetY: 0, offsetX: 0, contentScale: 1.05
             },
             {
                 type: "text", content: "Rewind mode:", fontSize: 34, color: "0xFEFF49",
-                offsetY: -170, stroke: "0x000000", strokeThickness: 5
+                offsetY: -150, stroke: "0x000000", strokeThickness: 5
             },
             {
-                type: "text", content: "Toggle", fontSize: 20, color: "0xFEFF49",
+                type: "text", content: "Toggle", fontSize: optionsFontSize, color: optionsColor,
                 stroke: "0x000000", strokeThickness: 4,
-                offsetY: -120, offsetX: -180,
+                offsetY: -100, offsetX: -200,
                 callback: function () {
                     changePlayMode(playModes[0], this);         
                 }
             },
             {
-                type: "text",
-                content: "Trigger",
-                fontSize: 20,
-                color: "0xFEFF49",
-                stroke: "0x000000",
-                strokeThickness: 4,
-                offsetY: -120,
-                offsetX: -85,
+                type: "text", content: "Trigger", fontSize: optionsFontSize,
+                color: optionsColor, stroke: "0x000000", strokeThickness: 4,
+                offsetY: -100, offsetX: -90,
                 callback: function () {
                     changePlayMode(playModes[1], this);
                 }
             },
             {
-                type: "text",
-                content: "Gate",
-                fontSize: 20,
-                color: "0xFEFF49",
-                stroke: "0x000000",
-                strokeThickness: 4,
-                offsetY: -120,
-                offsetX: 0,
+                type: "text", content: "Gate", fontSize: optionsFontSize, 
+                color: optionsColor, stroke: "0x000000", strokeThickness: 4,
+                offsetY: -100, offsetX: 0,
                 callback: function () {
                     changePlayMode(playModes[2], this);
                 }
             },
             {
-                type: "text",
-                content: "Pause",
-                fontSize: 20,
-                color: "0xFEFF49",
-                stroke: "0x000000",
-                strokeThickness: 4,
-                offsetY: -120,
-                offsetX: 90,
+                type: "text", content: "Pause", fontSize: optionsFontSize,
+                color: optionsColor, stroke: "0x000000", strokeThickness: 4,
+                offsetY: -100, offsetX: 90,
                 callback: function () {
                     changePlayMode(playModes[3], this);
                 }
             },
             {
-                type: "text",
-                content: "None",
-                fontSize: 20,
-                color: "0xFEFF49",
-                stroke: "0x000000",
-                strokeThickness: 4,
-                offsetY: -120,
-                offsetX: 180,
+                type: "text", content: "None", fontSize: optionsFontSize,
+                color: optionsColor, stroke: "0x000000", strokeThickness: 4,
+                offsetY: -100, offsetX: 200,
                 callback: function () {
                     changePlayMode(playModes[4], this);
                 }
@@ -229,7 +214,7 @@ function openOptions(){
                 stroke: "0x000000", strokeThickness: 5
             },
             {
-                type: "text", content: "12s", fontSize: 24, color: "0xFEFF49",
+                type: "text", content: "12s", fontSize: 24, color: optionsColor,
                 offsetY: 0, offsetX: 100,
                 stroke: "0x000000", strokeThickness: 3,                     
                 callback: function () {
@@ -237,7 +222,7 @@ function openOptions(){
                 }
             },
             {
-                type: "text", content: "7s", fontSize: 24, color: "0xFEFF49",
+                type: "text", content: "7s", fontSize: 24, color: optionsColor,
                 offsetY: 0, offsetX: 33,
                 stroke: "0x000000", strokeThickness: 3,                     
                 callback: function () {
@@ -245,28 +230,45 @@ function openOptions(){
                 }
             },
             {
-                type: "text", content: "3s", fontSize: 24, color: "0xFEFF49",
+                type: "text", content: "3s", fontSize: 24, color: optionsColor,
                 offsetY: 0, offsetX: -33,
                 stroke: "0x000000", strokeThickness: 3, 
                 callback: function () {
                     changeTimer(timeModes[1], this);
                 }
             },
-             {
-                type: "text", content: "0s", fontSize: 24, color: "0xFEFF49",
+            {
+                type: "text", content: "0s", fontSize: 24, color: optionsColor,
                 offsetY: 0, offsetX: -100,
                 stroke: "0x000000", strokeThickness: 3, 
                 callback: function () {
                     changeTimer(timeModes[0], this);
                 }
             },
+            {
+                type: "text", content: "Allow Multichannel", fontSize: 24, color: optionsColor,
+                offsetY: 70, offsetX: 0,
+                stroke: "0x000000", strokeThickness: 3, 
+                callback: function () {
+                    allowMultiple(this);
+                }
+            },
             
             {
-                type: "image", content: "ok", offsetY: 120, contentScale: 0.35,
+                type: "text", content: "Please Rate Us!", fontSize: 17, color: optionsColor,
+                offsetY: 150, offsetX: -300,
+                stroke: "0x000000", strokeThickness: 3, 
+                callback: function () {
+                    window.open('market://details?id=com.com.johnnytal_failSounds');
+                }
+            },
+            
+            
+            {
+                type: "image", content: "ok", offsetY: 100, offsetX: 300, contentScale: 0.5,
                 callback: function () {
                     modal.hideModal('options');
                     banner.hide(); 
-                    rateUs();
                 }
             },
         ]
@@ -274,6 +276,8 @@ function openOptions(){
    
    modal.showModal("options"); 
    banner.show(); 
+   
+   if (multiSounds) modal.getModalItem('options',14).tint = 0x00ff00;
    
    if (mode == 'toggle') modal.getModalItem('options',4).tint = 0x00ff00;
    else if (mode == 'trigger') modal.getModalItem('options',5).tint = 0x00ff00;
@@ -286,7 +290,7 @@ function openOptions(){
    else if (time == 3) modal.getModalItem('options',12).tint = 0x00ff00;
    else if (time == 0) modal.getModalItem('options',13).tint = 0x00ff00;
     
-   for (n=0; n<15; n++){
+   for (n=0; n<17; n++){
        game.add.tween(modal.getModalItem('options',n)).from( { y: - 800 }, 500, Phaser.Easing.Linear.In, true);
    }    
 }
@@ -307,14 +311,10 @@ function changeTimer(_time, btn){
     btn.tint = 0x00ff00;
 }
 
-function rateUs(){
-    navigator.notification.confirm(
-    'I ask for so little... would you rate my app now?...',
+function allowMultiple(btn){
+    if (multiSounds) multiSounds = false;
+    else { multiSounds = true; }
     
-    function(button){
-        if (button == '1') {    // Rate Now
-            window.open('market://details?id=com.com.johnnytal_failSounds');
-        } 
-
-    }, 'Rate domainsicle', ['Rate now!', 'No Thanks']);   
+    if (btn.tint == 0xffffff) btn.tint = 0x00ff00;
+    else { btn.tint = 0xffffff; }
 }
