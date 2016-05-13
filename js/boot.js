@@ -18,12 +18,15 @@ var boot = function(game){};
 boot.prototype = {
     create: function(){
         game.stage.backgroundColor = '#fffa7a';
+        font = 'Luckiest Guy'; 
 
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
         this.scale.maxWidth = w;
         this.scale.maxHeight = h;
         
+        this.scale.forceOrientation(false, true);
+    
         game.state.start('Preloader');
     }
 };

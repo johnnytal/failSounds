@@ -167,12 +167,12 @@ function openOptions(){
             },
             {
                 type: "text", content: "Rewind mode:", fontSize: 34, color: "0xFEFF49",
-                offsetY: -150, stroke: "0x000000", strokeThickness: 5
+                offsetY: -150, stroke: "0x000000", strokeThickness: 5, fontFamily: "Luckiest Guy",
             },
             {
                 type: "text", content: "Toggle", fontSize: optionsFontSize, color: optionsColor,
                 stroke: "0x000000", strokeThickness: 4,
-                offsetY: -100, offsetX: -200,
+                offsetY: -100, offsetX: -210, fontFamily: "Luckiest Guy",
                 callback: function () {
                     changePlayMode(playModes[0], this);         
                 }
@@ -180,7 +180,7 @@ function openOptions(){
             {
                 type: "text", content: "Trigger", fontSize: optionsFontSize,
                 color: optionsColor, stroke: "0x000000", strokeThickness: 4,
-                offsetY: -100, offsetX: -90,
+                offsetY: -100, offsetX: -95, fontFamily: "Luckiest Guy",
                 callback: function () {
                     changePlayMode(playModes[1], this);
                 }
@@ -188,7 +188,7 @@ function openOptions(){
             {
                 type: "text", content: "Gate", fontSize: optionsFontSize, 
                 color: optionsColor, stroke: "0x000000", strokeThickness: 4,
-                offsetY: -100, offsetX: 0,
+                offsetY: -100, offsetX: 0, fontFamily: "Luckiest Guy",
                 callback: function () {
                     changePlayMode(playModes[2], this);
                 }
@@ -196,7 +196,7 @@ function openOptions(){
             {
                 type: "text", content: "Pause", fontSize: optionsFontSize,
                 color: optionsColor, stroke: "0x000000", strokeThickness: 4,
-                offsetY: -100, offsetX: 90,
+                offsetY: -100, offsetX: 95,  fontFamily: "Luckiest Guy",
                 callback: function () {
                     changePlayMode(playModes[3], this);
                 }
@@ -204,19 +204,19 @@ function openOptions(){
             {
                 type: "text", content: "None", fontSize: optionsFontSize,
                 color: optionsColor, stroke: "0x000000", strokeThickness: 4,
-                offsetY: -100, offsetX: 200,
+                offsetY: -100, offsetX: 210,  fontFamily: "Luckiest Guy",
                 callback: function () {
                     changePlayMode(playModes[4], this);
                 }
             },
             {
                 type: "text", content: "Set timer:", fontSize: 34, color: "0xFEFF49", offsetY: -50,
-                stroke: "0x000000", strokeThickness: 5
+                stroke: "0x000000", strokeThickness: 5,  fontFamily: "Luckiest Guy",
             },
             {
                 type: "text", content: "12s", fontSize: 24, color: optionsColor,
                 offsetY: 0, offsetX: 100,
-                stroke: "0x000000", strokeThickness: 3,                     
+                stroke: "0x000000", strokeThickness: 3, fontFamily: "Luckiest Guy",                     
                 callback: function () {
                     changeTimer(timeModes[3], this);
                 }
@@ -224,14 +224,14 @@ function openOptions(){
             {
                 type: "text", content: "7s", fontSize: 24, color: optionsColor,
                 offsetY: 0, offsetX: 33,
-                stroke: "0x000000", strokeThickness: 3,                     
+                stroke: "0x000000", strokeThickness: 3, fontFamily: "Luckiest Guy",                    
                 callback: function () {
                     changeTimer(timeModes[2], this);
                 }
             },
             {
                 type: "text", content: "3s", fontSize: 24, color: optionsColor,
-                offsetY: 0, offsetX: -33,
+                offsetY: 0, offsetX: -33,  fontFamily: "Luckiest Guy",
                 stroke: "0x000000", strokeThickness: 3, 
                 callback: function () {
                     changeTimer(timeModes[1], this);
@@ -239,7 +239,7 @@ function openOptions(){
             },
             {
                 type: "text", content: "0s", fontSize: 24, color: optionsColor,
-                offsetY: 0, offsetX: -100,
+                offsetY: 0, offsetX: -100,  fontFamily: "Luckiest Guy",
                 stroke: "0x000000", strokeThickness: 3, 
                 callback: function () {
                     changeTimer(timeModes[0], this);
@@ -247,7 +247,7 @@ function openOptions(){
             },
             {
                 type: "text", content: "Allow Multichannel", fontSize: 24, color: optionsColor,
-                offsetY: 70, offsetX: 0,
+                offsetY: 70, offsetX: 0,  fontFamily: "Luckiest Guy",
                 stroke: "0x000000", strokeThickness: 3, 
                 callback: function () {
                     allowMultiple(this);
@@ -255,9 +255,9 @@ function openOptions(){
             },
             
             {
-                type: "text", content: "Please Rate Us!", fontSize: 17, color: optionsColor,
-                offsetY: 150, offsetX: -300,
-                stroke: "0x000000", strokeThickness: 3, 
+                type: "text", content: "Rate if you like this!", fontSize: 16, color: '0x0000ff', fontFamily: "Luckiest Guy",
+                offsetY: 150, offsetX: -290,
+
                 callback: function () {
                     window.open('market://details?id=com.com.johnnytal_failSounds');
                 }
