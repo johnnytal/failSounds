@@ -119,14 +119,14 @@ gameMain.prototype = {
         gearBtn.alpha = 0.7;
         gearBtn.scale.set(0.9,0.9);
         
-       /* Cocoon.Ad.AdMob.configure({
+        Cocoon.Ad.AdMob.configure({
              android: { 
                   banner:"ca-app-pub-9795366520625065/3578360636"
              }
         });
         
         banner = Cocoon.Ad.AdMob.createBanner();
-        banner.load(); */ 
+        banner.load();  
          
     },
 
@@ -297,14 +297,14 @@ function openOptions(){
                 callback: function () {
                     modal.hideModal('options');
                     button7.inputEnabled = true;
-                    //banner.hide(); 
+                    banner.hide(); 
                 }
             },
         ]
    });
    
    modal.showModal("options"); 
-   //banner.show(); 
+   banner.show(); 
    
    if (multiSounds) modal.getModalItem('options',14).tint = 0x00ff00;
    
