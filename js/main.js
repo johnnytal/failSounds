@@ -200,7 +200,7 @@ function openOptions(){
             {
                 type: "text", content: "Toggle", fontSize: optionsFontSize, color: optionsColor,
                 stroke: "0x000000", strokeThickness: 4,
-                offsetY: -100, offsetX: -300, fontFamily: "Luckiest Guy",
+                offsetY: -100, offsetX: -305, fontFamily: "Luckiest Guy",
                 callback: function () {
                     changePlayMode(playModes[0], this);         
                 }
@@ -208,7 +208,7 @@ function openOptions(){
             {
                 type: "text", content: "Trigger", fontSize: optionsFontSize,
                 color: optionsColor, stroke: "0x000000", strokeThickness: 4,
-                offsetY: -100, offsetX: -150, fontFamily: "Luckiest Guy",
+                offsetY: -100, offsetX: -137, fontFamily: "Luckiest Guy",
                 callback: function () {
                     changePlayMode(playModes[1], this);
                 }
@@ -216,7 +216,7 @@ function openOptions(){
             {
                 type: "text", content: "Gate", fontSize: optionsFontSize, 
                 color: optionsColor, stroke: "0x000000", strokeThickness: 4,
-                offsetY: -100, offsetX: 0, fontFamily: "Luckiest Guy",
+                offsetY: -100, offsetX: 10, fontFamily: "Luckiest Guy",
                 callback: function () {
                     changePlayMode(playModes[2], this);
                 }
@@ -232,7 +232,7 @@ function openOptions(){
             {
                 type: "text", content: "None", fontSize: optionsFontSize,
                 color: optionsColor, stroke: "0x000000", strokeThickness: 4,
-                offsetY: -100, offsetX: 300,  fontFamily: "Luckiest Guy",
+                offsetY: -100, offsetX: 305,  fontFamily: "Luckiest Guy",
                 callback: function () {
                     changePlayMode(playModes[4], this);
                 }
