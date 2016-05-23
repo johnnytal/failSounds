@@ -5,8 +5,8 @@ preloader.prototype = {
         this.game.load.image("cricket", "assets/images/cricket.png");
         this.game.load.image("drums", "assets/images/drums.png");
         this.game.load.image("horn", "assets/images/horn.png");
-        this.game.load.image("jaws_harp","assets/images/jaws_harp.png");
-        this.game.load.image("mask","assets/images/mask.png");
+        this.game.load.image("random","assets/images/random.png");
+        this.game.load.image("mask","assets/images/horror.png");
         this.game.load.image("trombone","assets/images/trombone.png");
         
         this.game.load.image("button","assets/images/button.png");
@@ -22,6 +22,15 @@ preloader.prototype = {
         this.game.load.audio('sfxHorror', 'assets/audio/horror.mp3'); 
         this.game.load.audio('sfxJaws_harp', 'assets/audio/jaws_harp.mp3');
         this.game.load.audio('sfxTrombone', 'assets/audio/trombone.mp3');
+        
+        this.game.load.audio('sfxBoing', 'assets/audio/boing.mp3');
+        this.game.load.audio('sfxCheer', 'assets/audio/cheer.mp3');
+        this.game.load.audio('sfxCow', 'assets/audio/cow.mp3');
+        this.game.load.audio('sfxCrazy', 'assets/audio/crazy.mp3');
+        this.game.load.audio('sfxEvil', 'assets/audio/evil.mp3');
+        this.game.load.audio('sfxGlass', 'assets/audio/glass.mp3');
+        this.game.load.audio('sfxLaugh', 'assets/audio/laugh.mp3');
+        this.game.load.audio('sfxSnore', 'assets/audio/snore.mp3');
     },
     
     create: function(){

@@ -9,7 +9,10 @@ var gameMain = function(game){
     
     timeModes = [0, 3, 7, 12];
     time = timeModes[0];
-    
+
+    var bmd;
+    var innerCircle;
+    var outerCircle;
 };
 
 gameMain.prototype = {
@@ -23,18 +26,15 @@ gameMain.prototype = {
         button5 = this.add.sprite(303,235,'button');
         button6 = this.add.sprite(583,235,'button');
         
-        button7 = this.add.sprite(220,178,'button');
-        button7.scale.set(0.5,0.5);
-        button7.tint = 0x00bbff;
-        button7.alpha = 0.8;
-        
-        gearBtn = this.add.sprite(223,180,'gear');
-        gearBtn.alpha = 0.8;
+        button7 = this.add.sprite(205,175,'button');
+        button7.scale.set(0.6,0.6);
+        button7.tint = 0xffff00;
+        button7.alpha = 0.7;
         
         cricket = this.add.image(68, 104, 'cricket');
         drums = this.add.image(345, 70, 'drums');
         horn = this.add.image(625, 90, 'horn');
-        jaws_harp = this.add.image(65, 300, 'jaws_harp');
+        jaws_harp = this.add.image(75, 290, 'random');
         mask = this.add.image(370, 255, 'mask');
         trombone = this.add.image(627, 282, 'trombone');
         
@@ -45,14 +45,6 @@ gameMain.prototype = {
         button5.inputEnabled = true;
         button6.inputEnabled = true;
         button7.inputEnabled = true;
-        
-        button1.input.useHandCursor = true;
-        button2.input.useHandCursor = true;
-        button3.input.useHandCursor = true;
-        button4.input.useHandCursor = true;
-        button5.input.useHandCursor = true;
-        button6.input.useHandCursor = true;
-        button7.input.useHandCursor = true;
  
         sounds = [ 
             sfxCricket = game.add.audio('sfxCricket'),
@@ -60,9 +52,22 @@ gameMain.prototype = {
             sfxHorn = game.add.audio('sfxHorn'),
             sfxHorror = game.add.audio('sfxHorror'),
             sfxJaws_harp = game.add.audio('sfxJaws_harp'),
-            sfxTrombone = game.add.audio('sfxTrombone')
+            sfxTrombone = game.add.audio('sfxTrombone'),
+            
+            sfxBoing = game.add.audio('sfxBoing'),
+            sfxCheer = game.add.audio('sfxCheer'),
+            sfxCow = game.add.audio('sfxCow'),
+            sfxCrazy = game.add.audio('sfxCrazy'),
+            sfxEvil = game.add.audio('sfxEvil'),
+            sfxGlass = game.add.audio('sfxGlass'),
+            sfxLaugh = game.add.audio('sfxLaugh'),
+            sfxSnore = game.add.audio('sfxSnore')
         ];
         
+        randomColors = [
+            '#000055', '#00ff00', '#f3fff5', '#00ffff', '#000000', '#ffd00f'
+        ];
+
         modal = new gameModal(game);
         
         buttons = [button1, button2, button3, button4, button5, button6];
@@ -80,7 +85,8 @@ gameMain.prototype = {
         }, this);
         
         button4.events.onInputDown.add(function(){
-            playSound(sfxJaws_harp, button4, 0xaa55ff, '#00ffff');
+            playSound(sounds[game.rnd.integerInRange(0, sounds.length-1)],
+            button4, 0xaa55ff, randomColors[game.rnd.integerInRange(0, randomColors.length-1)]);
         }, this);
         
         button5.events.onInputDown.add(function(){
@@ -100,16 +106,37 @@ gameMain.prototype = {
                 if (mode == 'gate') stopSounds();
             }, this);  
         } 
+
+        bmd = game.make.bitmapData(800, 600);
+        bmd.addToWorld();
+
+        innerCircle = new Phaser.Circle(268, 238, 40);
+        outerCircle = new Phaser.Circle(268, 238, 120);
+    
+        game.add.tween(innerCircle).to( { x: 300, y: 200, radius: 1 }, 3000, "Sine.easeInOut", true, 0, -1, true);
+
+        gearBtn = this.add.sprite(240, 190,'gear');
+        gearBtn.alpha = 0.7;
+        gearBtn.scale.set(0.9,0.9);
         
-        Cocoon.Ad.AdMob.configure({
+       /* Cocoon.Ad.AdMob.configure({
              android: { 
                   banner:"ca-app-pub-9795366520625065/3578360636"
              }
         });
         
         banner = Cocoon.Ad.AdMob.createBanner();
-        banner.load();  
+        banner.load(); */ 
          
+    },
+
+    update: function(){
+        var grd = bmd.context.createRadialGradient(innerCircle.x, innerCircle.y, innerCircle.radius, outerCircle.x, outerCircle.y, outerCircle.radius);
+        grd.addColorStop(0, '#8ED6FF');
+        grd.addColorStop(1, '#003BA2');
+    
+        bmd.cls();
+        bmd.circle(outerCircle.x, outerCircle.y, outerCircle.radius, grd);
     }
 };
 
@@ -154,8 +181,9 @@ function playSound(sound, button, color1, color2){
 }
 
 function openOptions(){
+    button7.inputEnabled = false;
     optionsColor = '0x49FFFE';
-    optionsFontSize = 22;
+    optionsFontSize = 32;
     
     modal.createModal({
         type:"options",
@@ -172,7 +200,7 @@ function openOptions(){
             {
                 type: "text", content: "Toggle", fontSize: optionsFontSize, color: optionsColor,
                 stroke: "0x000000", strokeThickness: 4,
-                offsetY: -100, offsetX: -210, fontFamily: "Luckiest Guy",
+                offsetY: -100, offsetX: -300, fontFamily: "Luckiest Guy",
                 callback: function () {
                     changePlayMode(playModes[0], this);         
                 }
@@ -180,7 +208,7 @@ function openOptions(){
             {
                 type: "text", content: "Trigger", fontSize: optionsFontSize,
                 color: optionsColor, stroke: "0x000000", strokeThickness: 4,
-                offsetY: -100, offsetX: -95, fontFamily: "Luckiest Guy",
+                offsetY: -100, offsetX: -150, fontFamily: "Luckiest Guy",
                 callback: function () {
                     changePlayMode(playModes[1], this);
                 }
@@ -196,7 +224,7 @@ function openOptions(){
             {
                 type: "text", content: "Pause", fontSize: optionsFontSize,
                 color: optionsColor, stroke: "0x000000", strokeThickness: 4,
-                offsetY: -100, offsetX: 95,  fontFamily: "Luckiest Guy",
+                offsetY: -100, offsetX: 150,  fontFamily: "Luckiest Guy",
                 callback: function () {
                     changePlayMode(playModes[3], this);
                 }
@@ -204,7 +232,7 @@ function openOptions(){
             {
                 type: "text", content: "None", fontSize: optionsFontSize,
                 color: optionsColor, stroke: "0x000000", strokeThickness: 4,
-                offsetY: -100, offsetX: 210,  fontFamily: "Luckiest Guy",
+                offsetY: -100, offsetX: 300,  fontFamily: "Luckiest Guy",
                 callback: function () {
                     changePlayMode(playModes[4], this);
                 }
@@ -214,39 +242,39 @@ function openOptions(){
                 stroke: "0x000000", strokeThickness: 5,  fontFamily: "Luckiest Guy",
             },
             {
-                type: "text", content: "12s", fontSize: 24, color: optionsColor,
-                offsetY: 0, offsetX: 100,
+                type: "text", content: "12s", fontSize: optionsFontSize, color: optionsColor,
+                offsetY: 0, offsetX: 150,
                 stroke: "0x000000", strokeThickness: 3, fontFamily: "Luckiest Guy",                     
                 callback: function () {
                     changeTimer(timeModes[3], this);
                 }
             },
             {
-                type: "text", content: "7s", fontSize: 24, color: optionsColor,
-                offsetY: 0, offsetX: 33,
+                type: "text", content: "7s", fontSize: optionsFontSize, color: optionsColor,
+                offsetY: 0, offsetX: 50,
                 stroke: "0x000000", strokeThickness: 3, fontFamily: "Luckiest Guy",                    
                 callback: function () {
                     changeTimer(timeModes[2], this);
                 }
             },
             {
-                type: "text", content: "3s", fontSize: 24, color: optionsColor,
-                offsetY: 0, offsetX: -33,  fontFamily: "Luckiest Guy",
+                type: "text", content: "3s", fontSize: optionsFontSize, color: optionsColor,
+                offsetY: 0, offsetX: -50,  fontFamily: "Luckiest Guy",
                 stroke: "0x000000", strokeThickness: 3, 
                 callback: function () {
                     changeTimer(timeModes[1], this);
                 }
             },
             {
-                type: "text", content: "0s", fontSize: 24, color: optionsColor,
-                offsetY: 0, offsetX: -100,  fontFamily: "Luckiest Guy",
+                type: "text", content: "0s", fontSize: optionsFontSize, color: optionsColor,
+                offsetY: 0, offsetX: -150,  fontFamily: "Luckiest Guy",
                 stroke: "0x000000", strokeThickness: 3, 
                 callback: function () {
                     changeTimer(timeModes[0], this);
                 }
             },
             {
-                type: "text", content: "Allow Multichannel", fontSize: 24, color: optionsColor,
+                type: "text", content: "Allow Multichannel", fontSize: optionsFontSize, color: optionsColor,
                 offsetY: 70, offsetX: 0,  fontFamily: "Luckiest Guy",
                 stroke: "0x000000", strokeThickness: 3, 
                 callback: function () {
@@ -255,7 +283,7 @@ function openOptions(){
             },
             
             {
-                type: "text", content: "Rate if you like this!", fontSize: 16, color: '0x0000ff', fontFamily: "Luckiest Guy",
+                type: "text", content: "Rate if you like !", fontSize: 16, color: '0x0000ff', fontFamily: "Luckiest Guy",
                 offsetY: 150, offsetX: -290,
 
                 callback: function () {
@@ -268,14 +296,15 @@ function openOptions(){
                 type: "image", content: "ok", offsetY: 100, offsetX: 300, contentScale: 0.5,
                 callback: function () {
                     modal.hideModal('options');
-                    banner.hide(); 
+                    button7.inputEnabled = true;
+                    //banner.hide(); 
                 }
             },
         ]
    });
    
    modal.showModal("options"); 
-   banner.show(); 
+   //banner.show(); 
    
    if (multiSounds) modal.getModalItem('options',14).tint = 0x00ff00;
    
