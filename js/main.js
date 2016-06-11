@@ -159,8 +159,6 @@ gameMain.prototype = {
             banner = Cocoon.Ad.AdMob.createBanner();
             banner.load();  
         } catch(e){}
-         
-        //allowPhysics();
     },
 
     update: function(){
@@ -333,14 +331,14 @@ function openOptions(){
                 callback: function () {
                     modal.hideModal('options');
                     button7.inputEnabled = true;
-                   // banner.hide(); 
+                    banner.hide(); 
                 }
             },
         ]
    });
    
    modal.showModal("options"); 
-   //banner.show(); 
+   banner.show(); 
    
    if (multiSounds) modal.getModalItem('options',14).tint = 0x00ff00;
    
