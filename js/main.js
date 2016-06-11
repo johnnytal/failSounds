@@ -19,17 +19,33 @@ gameMain.prototype = {
     create: function(){  
         border = this.add.image(0,0,'border');
         
-        button1 = this.add.sprite(20,15,'button');
-        button2 = this.add.sprite(303,15,'button');
-        button3 = this.add.sprite(583,15,'button');
-        button4 = this.add.sprite(20,235,'button');
-        button5 = this.add.sprite(303,235,'button');
-        button6 = this.add.sprite(583,235,'button');
+        toldyouLabel = game.add.text(650, 125, 'Told you so!', {
+            font: '13px ' + font, fill: 'white', fontWeight: 'normal', align: 'left', 
+            stroke: "0x000000", strokeThickness: 2
+        });
+        toldyouLabel.angle = -15;
+        toldyouLabel.alpha = 0;
         
-        button7 = this.add.sprite(205,175,'button');
+        buttonsGroup = game.add.physicsGroup(Phaser.Physics.ARCADE);
+        buttonsGroup.enableBody = true;
+        buttonsGroup.physicsBodyType = Phaser.Physics.ARCADE;
+        
+        button1 = buttonsGroup.create(20, 15, 'button');
+        button2 = buttonsGroup.create(303, 15, 'button');
+        button3 = buttonsGroup.create(583, 15, 'button');
+        button4 = buttonsGroup.create(20, 235, 'button');
+        button5 = buttonsGroup.create(303, 235, 'button');
+        button6 = buttonsGroup.create(583, 235, 'button');
+        
+        button7 = this.add.sprite(205, 175, 'button');
         button7.scale.set(0.6,0.6);
         button7.tint = 0xffff00;
         button7.alpha = 0.7;
+        
+        button8 = this.add.sprite(485, 175, 'button');
+        button8.scale.set(0.6,0.6);
+        button8.tint = 0xffff00;
+        button8.alpha = 0.7;
         
         cricket = this.add.image(68, 104, 'cricket');
         drums = this.add.image(345, 70, 'drums');
@@ -37,7 +53,7 @@ gameMain.prototype = {
         jaws_harp = this.add.image(75, 290, 'random');
         mask = this.add.image(370, 255, 'mask');
         trombone = this.add.image(627, 282, 'trombone');
-        
+
         button1.inputEnabled = true;
         button2.inputEnabled = true;
         button3.inputEnabled = true;
@@ -45,6 +61,7 @@ gameMain.prototype = {
         button5.inputEnabled = true;
         button6.inputEnabled = true;
         button7.inputEnabled = true;
+        button8.inputEnabled = true;
  
         sounds = [ 
             sfxCricket = game.add.audio('sfxCricket'),
@@ -61,7 +78,9 @@ gameMain.prototype = {
             sfxEvil = game.add.audio('sfxEvil'),
             sfxGlass = game.add.audio('sfxGlass'),
             sfxLaugh = game.add.audio('sfxLaugh'),
-            sfxSnore = game.add.audio('sfxSnore')
+            sfxSnore = game.add.audio('sfxSnore'),
+            sfxUnimpressed = game.add.audio('sfxUnimpressed'),
+            sfxFailed = game.add.audio('sfxFailed')
         ];
         
         randomColors = [
@@ -71,7 +90,7 @@ gameMain.prototype = {
         modal = new gameModal(game);
         
         buttons = [button1, button2, button3, button4, button5, button6];
-        
+
         button1.events.onInputDown.add(function(){
             playSound(sfxCricket, button1, 0xaaff44, '#000055');
         }, this);
@@ -100,6 +119,10 @@ gameMain.prototype = {
         button7.events.onInputDown.add(function(){
             openOptions();
         }, this);
+        
+        button8.events.onInputDown.add(function(){
+            didYouKnow();
+        }, this);
        
         for (b = 0; b< buttons.length; b++){
             buttons[b].events.onInputUp.add(function(){
@@ -119,15 +142,25 @@ gameMain.prototype = {
         gearBtn.alpha = 0.7;
         gearBtn.scale.set(0.9,0.9);
         
-        Cocoon.Ad.AdMob.configure({
-             android: { 
-                  banner:"ca-app-pub-9795366520625065/3578360636"
-             }
-        });
-        
-        banner = Cocoon.Ad.AdMob.createBanner();
-        banner.load();  
+        knowBtn = this.add.sprite(547, 240,'bulb');
+        knowBtn.alpha = 0.7;
+        knowBtn.scale.set(0.9,0.9);
+        knowBtn.anchor.set(0.5,0.5);
+
+        game.add.tween(knowBtn.scale).to( { x: 1.001, y: 1.001 }, 5000, "Sine.easeInOut", true, 0, -1, true);
+
+        try{
+            Cocoon.Ad.AdMob.configure({
+                 android: { 
+                      banner:"ca-app-pub-9795366520625065/3578360636"
+                 }
+            });
+            
+            banner = Cocoon.Ad.AdMob.createBanner();
+            banner.load();  
+        } catch(e){}
          
+        //allowPhysics();
     },
 
     update: function(){
@@ -137,6 +170,8 @@ gameMain.prototype = {
     
         bmd.cls();
         bmd.circle(outerCircle.x, outerCircle.y, outerCircle.radius, grd);
+        
+        game.physics.arcade.collide(buttonsGroup);
     }
 };
 
@@ -147,6 +182,7 @@ function stopSounds(){
 }
 
 function playSound(sound, button, color1, color2){
+
     if (!sound.isPlaying){
         if (!multiSounds) stopSounds();
         
@@ -297,14 +333,14 @@ function openOptions(){
                 callback: function () {
                     modal.hideModal('options');
                     button7.inputEnabled = true;
-                    banner.hide(); 
+                   // banner.hide(); 
                 }
             },
         ]
    });
    
    modal.showModal("options"); 
-   banner.show(); 
+   //banner.show(); 
    
    if (multiSounds) modal.getModalItem('options',14).tint = 0x00ff00;
    
@@ -346,4 +382,85 @@ function allowMultiple(btn){
     
     if (btn.tint == 0xffffff) btn.tint = 0x00ff00;
     else { btn.tint = 0xffffff; }
+}
+
+function allowPhysics(){  
+    buttonsGroup.forEach(function(btn){
+        btn.body.gravity.y = game.rnd.integerInRange(-200, 200);
+        btn.body.gravity.x = game.rnd.integerInRange(-200, 200);
+        btn.body.bounce.y = 0.9;
+        btn.body.bounce.x = 0.9;
+        btn.body.collideWorldBounds = true;  
+    });
+}
+
+function didYouKnow(){
+    button8.inputEnabled = false;
+    
+    frame = game.add.sprite(150, 100, 'panel');
+    frame.scale.set(0.7, 0.7);
+    frame.tint = "0x022000";
+    
+    tweenDidYouKnow(frame);
+    
+    didYouKnows = ["Never push the red button", 'A short sequence played\nfor punctuation is called\na "Sting"',
+    'Notation of the drum que:', 'Indie developers love\nto get good ratings!', 
+    'Gate mode - the sound\n will play as long as\n you press the button', 
+    'Trigger mode - The sound\nwill restart when you\npress the button',
+    'Pause mode - The sound\nwill pause / resume\n when you press',
+    'In multichannel mode\nyou can play many sounds\nat the same time!',
+    "\"Never look at the\nTrombones, you'll only\nencourage them\"\n(R.Strauss)",
+    "\"I don't know why\nbut the trombone makes\nme very uncomfortable\"\n(S.Freud)",
+    "Some species of crickets\nare mute", 
+    "Male crickets chirp\nto attract female crickets,\nand also after\nsuccessful mating",
+    "This app will never include\nsounds of bodily functions.\nNot my style",
+    "Fail - an embarrassing\nor humorous mistake,\nhumiliating situation, etc.,\nthat is subject to\nridicule and given an\nexaggerated importance",
+    "This in an app by \niLyich Games.\nIlich is my dog.",
+    "Pyotr Tchaikovsky's \nmiddle name was Ilich",
+    "The Cow goes Moooooo!",
+    "The horror sound's origins\nare rooted in R.Wagner\nmusic, & were first heard\non Radio Dramas"
+    ];
+
+    rndDidYouKnow = game.rnd.integerInRange(0, didYouKnows.length - 1);
+    
+    if (rndDidYouKnow == 0){
+        redBtn = game.add.button(345, 205, 'button');
+        redBtn.scale.set(0.5, 0.5);
+        redBtn.inputEnabled = true;
+        redBtn.events.onInputDown.add(function(){
+           allowPhysics();
+        }, this);
+        
+        tweenDidYouKnow(redBtn);
+    }
+    
+    else if (rndDidYouKnow == 2){
+        notes = game.add.sprite(305, 207, 'stingNotes');
+        notes.scale.set(0.45, 0.45);
+        tweenDidYouKnow(notes);    
+    }
+    
+    else if (rndDidYouKnow == 13){
+        frame.scale.set(0.7, 1);    
+    }
+    
+    thisDidYouLabel = game.add.text(178, 127, didYouKnows[rndDidYouKnow], {
+        font: '36px ' + font, fill: 'white', fontWeight: 'normal', align: 'left', 
+        stroke: "0x000000", strokeThickness: 3
+    });
+     
+    tweenDidYouKnow(thisDidYouLabel);  
+}
+
+function tweenDidYouKnow(thing){
+    tweenY = game.add.tween(thing).from( { y: -500}, 350, Phaser.Easing.Sinusoidal.InOut, true);
+    tweenY.onComplete.add(function(){ 
+        setTimeout(function(){
+            tweenY2 = game.add.tween(thing).to( { y: 750}, 1000, Phaser.Easing.Sinusoidal.InOut, true);
+            tweenY2.onComplete.add(function(){ 
+                thing.destroy();
+                button8.inputEnabled = true;
+            });
+        }, 3200); 
+    });    
 }
