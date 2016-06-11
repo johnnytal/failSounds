@@ -274,12 +274,12 @@ function openOptions(){
                 }
             },
             {
-                type: "text", content: "Set timer:", fontSize: 34, color: "0xFEFF49", offsetY: -50,
+                type: "text", content: "Set timer:", fontSize: 34, color: "0xFEFF49", offsetY: -30,
                 stroke: "0x000000", strokeThickness: 5,  fontFamily: "Luckiest Guy",
             },
             {
                 type: "text", content: "12s", fontSize: optionsFontSize, color: optionsColor,
-                offsetY: 0, offsetX: 150,
+                offsetY: 20, offsetX: 150,
                 stroke: "0x000000", strokeThickness: 3, fontFamily: "Luckiest Guy",                     
                 callback: function () {
                     changeTimer(timeModes[3], this);
@@ -287,7 +287,7 @@ function openOptions(){
             },
             {
                 type: "text", content: "7s", fontSize: optionsFontSize, color: optionsColor,
-                offsetY: 0, offsetX: 50,
+                offsetY: 20, offsetX: 50,
                 stroke: "0x000000", strokeThickness: 3, fontFamily: "Luckiest Guy",                    
                 callback: function () {
                     changeTimer(timeModes[2], this);
@@ -295,7 +295,7 @@ function openOptions(){
             },
             {
                 type: "text", content: "3s", fontSize: optionsFontSize, color: optionsColor,
-                offsetY: 0, offsetX: -50,  fontFamily: "Luckiest Guy",
+                offsetY: 20, offsetX: -50,  fontFamily: "Luckiest Guy",
                 stroke: "0x000000", strokeThickness: 3, 
                 callback: function () {
                     changeTimer(timeModes[1], this);
@@ -303,7 +303,7 @@ function openOptions(){
             },
             {
                 type: "text", content: "0s", fontSize: optionsFontSize, color: optionsColor,
-                offsetY: 0, offsetX: -150,  fontFamily: "Luckiest Guy",
+                offsetY: 20, offsetX: -150,  fontFamily: "Luckiest Guy",
                 stroke: "0x000000", strokeThickness: 3, 
                 callback: function () {
                     changeTimer(timeModes[0], this);
@@ -311,7 +311,7 @@ function openOptions(){
             },
             {
                 type: "text", content: "Allow Multichannel", fontSize: optionsFontSize, color: optionsColor,
-                offsetY: 70, offsetX: 0,  fontFamily: "Luckiest Guy",
+                offsetY: 90, offsetX: 0,  fontFamily: "Luckiest Guy",
                 stroke: "0x000000", strokeThickness: 3, 
                 callback: function () {
                     allowMultiple(this);
@@ -319,7 +319,7 @@ function openOptions(){
             },
             
             {
-                type: "text", content: "Rate if you like !", fontSize: 16, color: '0x0000ff', fontFamily: "Luckiest Guy",
+                type: "text", content: "Click here to rate!", fontSize: 16, color: '0x0000ff', fontFamily: "Luckiest Guy",
                 offsetY: 150, offsetX: -290,
 
                 callback: function () {
@@ -398,7 +398,7 @@ function didYouKnow(){
     button8.inputEnabled = false;
     
     frame = game.add.sprite(150, 100, 'panel');
-    frame.scale.set(0.7, 0.7);
+    frame.scale.set(0.85, 0.85);
     frame.tint = "0x022000";
     
     tweenDidYouKnow(frame);
@@ -441,11 +441,11 @@ function didYouKnow(){
     }
     
     else if (rndDidYouKnow == 13){
-        frame.scale.set(0.7, 1);    
+        frame.scale.set(0.85, 1.1);    
     }
     
     thisDidYouLabel = game.add.text(178, 127, didYouKnows[rndDidYouKnow], {
-        font: '36px ' + font, fill: 'white', fontWeight: 'normal', align: 'left', 
+        font: '34px ' + font, fill: 'white', fontWeight: 'normal', align: 'center', 
         stroke: "0x000000", strokeThickness: 3
     });
      
