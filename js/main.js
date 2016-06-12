@@ -394,13 +394,7 @@ function allowPhysics(){
 
 function didYouKnow(){
     button8.inputEnabled = false;
-    
-    frame = game.add.sprite(150, 100, 'panel');
-    frame.scale.set(0.85, 0.85);
-    frame.tint = "0x022000";
-    
-    tweenDidYouKnow(frame);
-    
+
     didYouKnows = ["Never push the red button", 'A short sequence played\nfor punctuation is called\na "Sting"',
     'Notation of the drum que:', 'Indie developers love\nto get good ratings!', 
     'Gate mode - the sound\n will play as long as\n you press the button', 
@@ -413,23 +407,29 @@ function didYouKnow(){
     "Male crickets chirp\nto attract female crickets,\nand also after\nsuccessful mating",
     "This app will never include\nsounds of bodily functions.\nNot my style",
     "Fail - an embarrassing\nor humorous mistake,\nhumiliating situation, etc.,\nthat is subject to\nridicule and given an\nexaggerated importance",
-    "This in an app by \niLyich Games.\nIlich is my dog.",
+    "This in an app by iLyich Games.\nIlich is my dog.",
     "Pyotr Tchaikovsky's \nmiddle name was Ilich",
     "The Cow goes Moooooo!",
-    "The horror sound's origins\nare rooted in R.Wagner\nmusic, & were first heard\non Radio Dramas"
+    "The horror sound's origins\nare rooted in R.Wagner\nmusic, & were first heard\non Radio Dramas",
+    "The longest drum roll\nwas played by\nChristopher Anthony - 8H 1M 17S",
+    "7 Seconds is the\naverage time it takes\nto tell a really\nstupid joke",
+    "The cubical dice was\noriginated in China\nat about 600 b.c"
     ];
 
     rndDidYouKnow = game.rnd.integerInRange(0, didYouKnows.length - 1);
     
     if (rndDidYouKnow == 0){
-        redBtn = game.add.button(345, 205, 'button');
+        redBtn = game.add.button(345, 200, 'button');
         redBtn.scale.set(0.5, 0.5);
         redBtn.inputEnabled = true;
+        redBtn.tint = '0xff0000';
         redBtn.events.onInputDown.add(function(){
            allowPhysics();
         }, this);
         
         tweenDidYouKnow(redBtn);
+        
+        didYouKnows.push("You shouldn't have\npushed the red button");
     }
     
     else if (rndDidYouKnow == 2){
@@ -438,13 +438,9 @@ function didYouKnow(){
         tweenDidYouKnow(notes);    
     }
     
-    else if (rndDidYouKnow == 13){
-        frame.scale.set(0.85, 1.1);    
-    }
-    
-    thisDidYouLabel = game.add.text(178, 127, didYouKnows[rndDidYouKnow], {
-        font: '34px ' + font, fill: 'white', fontWeight: 'normal', align: 'center', 
-        stroke: "0x000000", strokeThickness: 3
+    thisDidYouLabel = game.add.text(185, 90, didYouKnows[rndDidYouKnow], {
+        font: '34px ' + font, fill: 'lightblue', fontWeight: 'normal', align: 'center', 
+        stroke: "black", strokeThickness: 7
     });
      
     tweenDidYouKnow(thisDidYouLabel);  
