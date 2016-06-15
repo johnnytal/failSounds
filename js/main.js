@@ -1,6 +1,6 @@
 var gameMain = function(game){
     var sounds;
-    var inter;
+    var interstitial;
     var timesClosed;
     var timesPlayed;
     var timesknown;
@@ -206,7 +206,7 @@ function playSound(sound, button, color1, color2){
            if (timesPlayed == 12){
                timesPlayed = 0;
                try{
-                   inter.show();
+                   interstitial.show();
                } catch(e){}
            }
            
@@ -350,7 +350,7 @@ function openOptions(){
                         timesClosed = 0;
                         
                         try{    
-                            inter.show();
+                            interstitial.show();
                         } catch(e){}
                     }
                     
@@ -480,7 +480,7 @@ function tweenDidYouKnow(thing){
                 if (timesknown == 8){
                     timesknown = 0;
                     try{
-                        inter.show();
+                        interstitial.show();
                     } catch(e){}
                 }
                 
