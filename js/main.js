@@ -1,7 +1,10 @@
 var gameMain = function(game){
     var sounds;
-    var banner;
-    
+    var inter;
+    var timesClosed;
+    var timesPlayed;
+    var timesknown;
+        
     multiSounds = false;
     
     playModes = ['toggle', 'trigger', 'gate', 'pause', 'none'];
@@ -17,15 +20,16 @@ var gameMain = function(game){
 
 gameMain.prototype = {
     create: function(){  
+        timesClosed = 0;
+        timesPlayed = 0;
+        timesknown = 0;
+    
         border = this.add.image(0,0,'border');
         
-        toldyouLabel = game.add.text(650, 125, 'Told you so!', {
-            font: '13px ' + font, fill: 'white', fontWeight: 'normal', align: 'left', 
-            stroke: "0x000000", strokeThickness: 2
-        });
-        toldyouLabel.angle = -15;
-        toldyouLabel.alpha = 0;
-        
+        game.add.text(650, 125, '', {
+            font: '1px ' + font, fill: 'white', fontWeight: 'normal', align: 'left'
+        }).visible = false;
+
         buttonsGroup = game.add.physicsGroup(Phaser.Physics.ARCADE);
         buttonsGroup.enableBody = true;
         buttonsGroup.physicsBodyType = Phaser.Physics.ARCADE;
@@ -151,13 +155,13 @@ gameMain.prototype = {
 
         try{
             Cocoon.Ad.AdMob.configure({
-                 android: { 
-                      banner:"ca-app-pub-9795366520625065/3578360636"
-                 }
+                android: { 
+                    interstitial:"ca-app-pub-9795366520625065/1704674634"
+                }
             });
-            
-            banner = Cocoon.Ad.AdMob.createBanner();
-            banner.load();  
+
+            interstitial = Cocoon.Ad.AdMob.createInterstitial();
+            interstitial.load();
         } catch(e){}
     },
 
@@ -195,7 +199,17 @@ function playSound(sound, button, color1, color2){
 
         button.tint = color1;
         sound.onStop.add(function(){
+           
            button.tint = 0xffffff;
+           
+           timesPlayed++;
+           if (timesPlayed == 12){
+               timesPlayed = 0;
+               try{
+                   inter.show();
+               } catch(e){}
+           }
+           
         }, this);
         
         game.stage.backgroundColor = color2;
@@ -330,15 +344,23 @@ function openOptions(){
                 type: "image", content: "ok", offsetY: 100, offsetX: 300, contentScale: 0.5,
                 callback: function () {
                     modal.hideModal('options');
+                    timesClosed++;
+                    
+                    if (timesClosed == 4){
+                        timesClosed = 0;
+                        
+                        try{    
+                            inter.show();
+                        } catch(e){}
+                    }
+                    
                     button7.inputEnabled = true;
-                    banner.hide(); 
                 }
             },
         ]
    });
    
    modal.showModal("options"); 
-   banner.show(); 
    
    if (multiSounds) modal.getModalItem('options',14).tint = 0x00ff00;
    
@@ -410,7 +432,7 @@ function didYouKnow(){
     "This in an app by iLyich Games.\nIlich is my dog.",
     "Pyotr Tchaikovsky's \nmiddle name was Ilich",
     "The Cow goes Moooooo!",
-    "The horror sound's origins\nare rooted in R.Wagner\nmusic, & were first heard\non Radio Dramas",
+    "The horror sound's origins\nrooted in R.Wagner\nmusic, were first heard\non Radio Dramas",
     "The longest drum roll\nwas played by\nChristopher Anthony - 8H 1M 17S",
     "7 Seconds is the\naverage time it takes\nto tell a really\nstupid joke",
     "The cubical dice was\noriginated in China\nat about 600 b.c"
@@ -434,7 +456,6 @@ function didYouKnow(){
     
     else if (rndDidYouKnow == 2){
         notes = game.add.sprite(305, 207, 'stingNotes');
-        notes.scale.set(0.45, 0.45);
         tweenDidYouKnow(notes);    
     }
     
@@ -454,6 +475,15 @@ function tweenDidYouKnow(thing){
             tweenY2.onComplete.add(function(){ 
                 thing.destroy();
                 button8.inputEnabled = true;
+                
+                timesknown++;
+                if (timesknown == 8){
+                    timesknown = 0;
+                    try{
+                        inter.show();
+                    } catch(e){}
+                }
+                
             });
         }, 3200); 
     });    
