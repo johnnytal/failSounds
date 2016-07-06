@@ -1,16 +1,15 @@
 var gameMain = function(game){
     var sounds;
     var interstitial;
-    var timesClosed;
-    var timesPlayed;
-    var timesknown;
+    var actions;
         
     multiSounds = false;
+    randomTimer = false;
     
     playModes = ['toggle', 'trigger', 'gate', 'pause', 'none'];
     mode = playModes[0];
     
-    timeModes = [0, 3, 7, 12];
+    timeModes = [0, 3, 7, 12, '?'];
     time = timeModes[0];
 
     var bmd;
@@ -20,11 +19,9 @@ var gameMain = function(game){
 
 gameMain.prototype = {
     create: function(){  
-        timesClosed = 0;
-        timesPlayed = 0;
-        timesknown = 0;
+        actions = 0;
     
-        border = this.add.image(0,0,'border');
+        border = this.add.image(0, 0, 'border');
         
         game.add.text(650, 125, '', {
             font: '1px ' + font, fill: 'white', fontWeight: 'normal', align: 'left'
@@ -84,7 +81,8 @@ gameMain.prototype = {
             sfxLaugh = game.add.audio('sfxLaugh'),
             sfxSnore = game.add.audio('sfxSnore'),
             sfxUnimpressed = game.add.audio('sfxUnimpressed'),
-            sfxFailed = game.add.audio('sfxFailed')
+            sfxFailed = game.add.audio('sfxFailed'),
+            sfxBoo = game.add.audio('sfxBoo')
         ];
         
         randomColors = [
@@ -167,8 +165,8 @@ gameMain.prototype = {
 
     update: function(){
         var grd = bmd.context.createRadialGradient(innerCircle.x, innerCircle.y, innerCircle.radius, outerCircle.x, outerCircle.y, outerCircle.radius);
-        grd.addColorStop(0, '#8ED6FF');
-        grd.addColorStop(1, '#003BA2');
+        grd.addColorStop(0, '#8ED6bb');
+        grd.addColorStop(1, '#006d33');
     
         bmd.cls();
         bmd.circle(outerCircle.x, outerCircle.y, outerCircle.radius, grd);
@@ -196,19 +194,17 @@ function playSound(sound, button, color1, color2){
                 sound.resume();
             }
         }, (time * 1000));
+        
+        if (randomTimer){
+            changeTimer('?', null);
+        }
 
         button.tint = color1;
         sound.onStop.add(function(){
            
            button.tint = 0xffffff;
            
-           timesPlayed++;
-           if (timesPlayed == 12){
-               timesPlayed = 0;
-               try{
-                   interstitial.show();
-               } catch(e){}
-           }
+           addAction();
            
         }, this);
         
@@ -290,8 +286,16 @@ function openOptions(){
                 stroke: "0x000000", strokeThickness: 5,  fontFamily: "Luckiest Guy",
             },
             {
+                type: "text", content: "???s", fontSize: optionsFontSize, color: optionsColor,
+                offsetY: 20, offsetX: 200,
+                stroke: "0x000000", strokeThickness: 3, fontFamily: "Luckiest Guy",                     
+                callback: function () {
+                    changeTimer(timeModes[4], this);
+                }
+            },
+            {
                 type: "text", content: "12s", fontSize: optionsFontSize, color: optionsColor,
-                offsetY: 20, offsetX: 150,
+                offsetY: 20, offsetX: 100,
                 stroke: "0x000000", strokeThickness: 3, fontFamily: "Luckiest Guy",                     
                 callback: function () {
                     changeTimer(timeModes[3], this);
@@ -299,7 +303,7 @@ function openOptions(){
             },
             {
                 type: "text", content: "7s", fontSize: optionsFontSize, color: optionsColor,
-                offsetY: 20, offsetX: 50,
+                offsetY: 20, offsetX: 0,
                 stroke: "0x000000", strokeThickness: 3, fontFamily: "Luckiest Guy",                    
                 callback: function () {
                     changeTimer(timeModes[2], this);
@@ -307,15 +311,15 @@ function openOptions(){
             },
             {
                 type: "text", content: "3s", fontSize: optionsFontSize, color: optionsColor,
-                offsetY: 20, offsetX: -50,  fontFamily: "Luckiest Guy",
+                offsetY: 20, offsetX: -100,  fontFamily: "Luckiest Guy",
                 stroke: "0x000000", strokeThickness: 3, 
                 callback: function () {
                     changeTimer(timeModes[1], this);
                 }
             },
             {
-                type: "text", content: "0s", fontSize: optionsFontSize, color: optionsColor,
-                offsetY: 20, offsetX: -150,  fontFamily: "Luckiest Guy",
+                type: "text", content: "None", fontSize: optionsFontSize, color: optionsColor,
+                offsetY: 20, offsetX: -200,  fontFamily: "Luckiest Guy",
                 stroke: "0x000000", strokeThickness: 3, 
                 callback: function () {
                     changeTimer(timeModes[0], this);
@@ -344,15 +348,7 @@ function openOptions(){
                 type: "image", content: "ok", offsetY: 100, offsetX: 300, contentScale: 0.5,
                 callback: function () {
                     modal.hideModal('options');
-                    timesClosed++;
-                    
-                    if (timesClosed == 4){
-                        timesClosed = 0;
-                        
-                        try{    
-                            interstitial.show();
-                        } catch(e){}
-                    }
+                    addAction();
                     
                     button7.inputEnabled = true;
                 }
@@ -362,20 +358,21 @@ function openOptions(){
    
    modal.showModal("options"); 
    
-   if (multiSounds) modal.getModalItem('options',14).tint = 0x00ff00;
+   if (multiSounds) modal.getModalItem('options',15).tint = 0x00ff00;
    
    if (mode == 'toggle') modal.getModalItem('options',4).tint = 0x00ff00;
    else if (mode == 'trigger') modal.getModalItem('options',5).tint = 0x00ff00;
    else if (mode == 'gate') modal.getModalItem('options',6).tint = 0x00ff00;
    else if (mode == 'pause') modal.getModalItem('options',7).tint = 0x00ff00;
    else if (mode == 'none') modal.getModalItem('options',8).tint = 0x00ff00;
-
-   if (time == 12) modal.getModalItem('options',10).tint = 0x00ff00;
-   else if (time == 7) modal.getModalItem('options',11).tint = 0x00ff00;
-   else if (time == 3) modal.getModalItem('options',12).tint = 0x00ff00;
-   else if (time == 0) modal.getModalItem('options',13).tint = 0x00ff00;
     
-   for (n=0; n<17; n++){
+   if (randomTimer) modal.getModalItem('options',10).tint = 0x00ff00;
+   else if (time == 12) modal.getModalItem('options',11).tint = 0x00ff00;
+   else if (time == 7) modal.getModalItem('options',12).tint = 0x00ff00;
+   else if (time == 3) modal.getModalItem('options',13).tint = 0x00ff00;
+   else if (time == 0) modal.getModalItem('options',14).tint = 0x00ff00;
+    
+   for (n=0; n<18; n++){
        game.add.tween(modal.getModalItem('options',n)).from( { y: - 800 }, 500, Phaser.Easing.Linear.In, true);
    }    
 }
@@ -389,11 +386,18 @@ function changePlayMode(_mode, btn){
 }
 
 function changeTimer(_time, btn){
-    time = _time;
-    for (n=13; n>9; n--){
+    if (_time == '?'){
+        time = game.rnd.integerInRange(2, 60);
+        randomTimer = true;
+    }
+    else{
+        time = _time;
+        randomTimer = false;
+    }
+    for (n = 14; n > 9; n--){
         modal.getModalItem('options', n).tint = 0xffffff;
     } 
-    btn.tint = 0x00ff00;
+    if (btn != null) btn.tint = 0x00ff00;
 }
 
 function allowMultiple(btn){
@@ -433,9 +437,15 @@ function didYouKnow(){
     "Pyotr Tchaikovsky's \nmiddle name was Ilich",
     "The Cow goes Moooooo!",
     "The horror sound's origins\nrooted in R.Wagner\nmusic, were first heard\non Radio Dramas",
-    "The longest drum roll\nwas played by\nChristopher Anthony - 8H 1M 17S",
+    "The longest drum roll\nwas played by\nChristopher Anthony - \n8H 1M 17S",
     "7 Seconds is the\naverage time it takes\nto tell a really\nstupid joke",
-    "The cubical dice was\noriginated in China\nat about 600 b.c"
+    "The cubical dice was\noriginated in China\nat about 600 b.c",
+    "Set the timer to '???s'\nto play the sound\nat a random time\nbetween 2 & 60 seconds",
+    "Atychiphobia - \nThe fear of failure",
+    "Everybody fails",
+    "I won't ask you\nto click the ads\nif you like this app\ncause that would be\nunethical",
+    "\"Success is most often\nachieved by those\nwho don't know that\nfailure is inevitable.\"\n(Coco Chanel)",
+    "\"We are all failures - \nat least the best\nof us are\"\n(J.M. Barrie)"
     ];
 
     rndDidYouKnow = game.rnd.integerInRange(0, didYouKnows.length - 1);
@@ -476,15 +486,20 @@ function tweenDidYouKnow(thing){
                 thing.destroy();
                 button8.inputEnabled = true;
                 
-                timesknown++;
-                if (timesknown == 8){
-                    timesknown = 0;
-                    try{
-                        interstitial.show();
-                    } catch(e){}
-                }
-                
+                addAction();
             });
-        }, 3200); 
+        }, didYouKnows[rndDidYouKnow].length * 60); 
     });    
+}
+
+function addAction(){
+   actions++;
+   if (actions == 18){
+       
+       try{
+           interstitial.show();
+       } catch(e){}
+       
+       actions = 0;
+   }
 }

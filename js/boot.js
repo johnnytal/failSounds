@@ -30,3 +30,4 @@ boot.prototype = {
         game.state.start('Preloader');
     }
 };
+
