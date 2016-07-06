@@ -203,12 +203,11 @@ function playSound(sound, button, color1, color2){
         sound.onStop.add(function(){
            
            button.tint = 0xffffff;
-           
-           addAction();
-           
+
         }, this);
         
         game.stage.backgroundColor = color2;
+        addAction();
     } 
     else{
         if (mode == 'toggle'){
