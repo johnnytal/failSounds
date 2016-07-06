@@ -1,7 +1,7 @@
 var gameMain = function(game){
     var sounds;
     var interstitial;
-    var actions;
+    var actions = 0;
         
     multiSounds = false;
     randomTimer = false;
@@ -493,13 +493,12 @@ function tweenDidYouKnow(thing){
 }
 
 function addAction(){
-   actions++;
-   if (actions == 18){
+   if (actions < 18) actions++;
+   else if (actions == 18){
+       actions = 0;
        
        try{
            interstitial.show();
        } catch(e){}
-       
-       actions = 0;
    }
 }
