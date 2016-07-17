@@ -2,9 +2,6 @@ document.addEventListener("deviceready", start, false);
 //window.onload = start;
 
 function start(){   
-    w = window.innerWidth * window.devicePixelRatio;
-    h = window.innerHeight * window.devicePixelRatio;
-    
     game = new Phaser.Game(850, 480, Phaser.CANVAS, "");    
       
     game.state.add("Boot", boot);
@@ -22,8 +19,8 @@ boot.prototype = {
 
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
-        this.scale.maxWidth = w;
-        this.scale.maxHeight = h;
+        this.scale.maxWidth = window.innerWidth * window.devicePixelRatio;
+        this.scale.maxHeight = window.innerHeight * window.devicePixelRatio;
         
         this.scale.forceOrientation(false, true);
     

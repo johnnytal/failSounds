@@ -444,7 +444,8 @@ function didYouKnow(){
     "Everybody fails",
     "I won't ask you\nto click the ads\nif you like this app\ncause that would be\nunethical",
     "\"Success is most often\nachieved by those\nwho don't know that\nfailure is inevitable.\"\n(Coco Chanel)",
-    "\"We are all failures - \nat least the best\nof us are\"\n(J.M. Barrie)"
+    "\"We are all failures - \nat least the best\nof us are\"\n(J.M. Barrie)",
+    "cricket chirps are more frequent\nin higher temperature"
     ];
 
     rndDidYouKnow = game.rnd.integerInRange(0, didYouKnows.length - 1);
@@ -492,8 +493,8 @@ function tweenDidYouKnow(thing){
 }
 
 function addAction(){
-   if (actions < 18) actions++;
-   else if (actions == 18){
+   if (actions < 15) actions++;
+   else if (actions == 15){
        actions = 0;
        
        try{
