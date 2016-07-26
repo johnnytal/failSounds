@@ -513,8 +513,8 @@ function addAction(){
            setTimeout(function(){
                try{
                    interstitial.show();
-               } catch(e){    
-           });
+               } catch(e){}  
+           }, 2000);
        }
    }
 }
