@@ -168,7 +168,8 @@ gameMain.prototype = {
 
             //banner.setLayout(Cocoon.Ad.AdMob.BannerLayout.BOTTOM_CENTER );
             //banner.setBannerLayout(Cocoon.Ad.AdMob.BannerLayout.BOTTOM_CENTER)
-        },
+        } catch(e){}
+    },
 
     update: function(){
         var grd = bmd.context.createRadialGradient(innerCircle.x, innerCircle.y, innerCircle.radius, outerCircle.x, outerCircle.y, outerCircle.radius);
