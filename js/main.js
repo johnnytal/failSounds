@@ -503,8 +503,8 @@ function tweenDidYouKnow(thing){
 }
 
 function addAction(){
-   if (actions < 14) actions++;
-   else if (actions >= 14){
+   actions++;
+   if (actions >= 14){
        actions = 0;
        
        try{
