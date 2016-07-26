@@ -1,6 +1,7 @@
 var gameMain = function(game){
     var sounds;
     var interstitial;
+    var banner;
     var actions = 0;
         
     multiSounds = false;
@@ -154,14 +155,20 @@ gameMain.prototype = {
         try{
             Cocoon.Ad.AdMob.configure({
                 android: { 
+                    banner:"ca-app-pub-9795366520625065/3578360636",
                     interstitial:"ca-app-pub-9795366520625065/1704674634"
                 }
             });
 
             interstitial = Cocoon.Ad.AdMob.createInterstitial();
             interstitial.load();
-        } catch(e){}
-    },
+            
+            banner = Cocoon.Ad.AdMob.createBanner();
+            banner.load();
+
+            //banner.setLayout(Cocoon.Ad.AdMob.BannerLayout.BOTTOM_CENTER );
+            //banner.setBannerLayout(Cocoon.Ad.AdMob.BannerLayout.BOTTOM_CENTER)
+        },
 
     update: function(){
         var grd = bmd.context.createRadialGradient(innerCircle.x, innerCircle.y, innerCircle.radius, outerCircle.x, outerCircle.y, outerCircle.radius);
@@ -347,6 +354,7 @@ function openOptions(){
                 type: "image", content: "ok", offsetY: 100, offsetX: 300, contentScale: 0.5,
                 callback: function () {
                     modal.hideModal('options');
+                    banner.hide();
                     addAction();
                     
                     button7.inputEnabled = true;
@@ -356,6 +364,7 @@ function openOptions(){
    });
    
    modal.showModal("options"); 
+   banner.show();
    
    if (multiSounds) modal.getModalItem('options',15).tint = 0x00ff00;
    
@@ -493,12 +502,18 @@ function tweenDidYouKnow(thing){
 }
 
 function addAction(){
-   if (actions < 15) actions++;
-   else if (actions == 15){
+   if (actions < 14) actions++;
+   else if (actions >= 14){
        actions = 0;
        
        try{
            interstitial.show();
-       } catch(e){}
+       } catch(e){
+           setTimeout(function(){
+               try{
+                   interstitial.show();
+               } catch(e){    
+           });
+       }
    }
 }
