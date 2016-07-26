@@ -18,24 +18,24 @@ preloader.prototype = {
         this.game.load.image("bulb","assets/images/bulb.png");
         this.game.load.image("stingNotes","assets/images/stingNotes.png");
         
-        this.game.load.audio('sfxCricket', ['assets/audio/crickets.ogg', 'assets/audio/crickets.mp3']);
-        this.game.load.audio('sfxDrums', ['assets/audio/drums.ogg', 'assets/audio/drums.mp3']);
-        this.game.load.audio('sfxHorn', ['assets/audio/horn.ogg', 'assets/audio/horn.mp3']);
-        this.game.load.audio('sfxHorror', ['assets/audio/horror.ogg', 'assets/audio/horror.mp3']); 
-        this.game.load.audio('sfxJaws_harp', ['assets/audio/jaws_harp.ogg', 'assets/audio/jaws_harp.mp3']);
-        this.game.load.audio('sfxTrombone', ['assets/audio/trombone.ogg', 'assets/audio/trombone.mp3']);
+        this.game.load.audio('sfxCricket', 'assets/audio/crickets.ogg');
+        this.game.load.audio('sfxDrums', 'assets/audio/drums.ogg');
+        this.game.load.audio('sfxHorn', 'assets/audio/horn.ogg');
+        this.game.load.audio('sfxHorror', 'assets/audio/horror.ogg'); 
+        this.game.load.audio('sfxJaws_harp', 'assets/audio/jaws_harp.ogg');
+        this.game.load.audio('sfxTrombone', 'assets/audio/trombone.ogg');
 
-        this.game.load.audio('sfxBoing', ['assets/audio/boing.ogg', 'assets/audio/boing.mp3']);
-        this.game.load.audio('sfxCheer', ['assets/audio/cheer.ogg', 'assets/audio/cheer.mp3']);
-        this.game.load.audio('sfxCow', ['assets/audio/cow.ogg', 'assets/audio/cow.mp3']);
-        this.game.load.audio('sfxCrazy', ['assets/audio/crazy.ogg', 'assets/audio/crazy.mp3']);
-        this.game.load.audio('sfxEvil', ['assets/audio/evil.ogg', 'assets/audio/evil.mp3']);
-        this.game.load.audio('sfxGlass', ['assets/audio/glass.ogg', 'assets/audio/glass.mp3']);
-        this.game.load.audio('sfxLaugh', ['assets/audio/laugh.ogg', 'assets/audio/laugh.mp3']);
-        this.game.load.audio('sfxSnore', ['assets/audio/snore.ogg', 'assets/audio/snore.mp3']);
-        this.game.load.audio('sfxUnimpressed', ['assets/audio/unimpressed.ogg', 'assets/audio/unimpressed.mp3']);
-        this.game.load.audio('sfxFailed', ['assets/audio/you-have-failed.ogg', 'assets/audio/you-have-failed.mp3']);
-        this.game.load.audio('sfxBoo', ['assets/audio/boo.ogg', 'assets/audio/boo.mp3']);
+        this.game.load.audio('sfxBoing', 'assets/audio/boing.ogg');
+        this.game.load.audio('sfxCheer', 'assets/audio/cheer.ogg');
+        this.game.load.audio('sfxCow', 'assets/audio/cow.ogg');
+        this.game.load.audio('sfxCrazy', 'assets/audio/crazy.ogg');
+        this.game.load.audio('sfxEvil', 'assets/audio/evil.ogg');
+        this.game.load.audio('sfxGlass', 'assets/audio/glass.ogg');
+        this.game.load.audio('sfxLaugh', 'assets/audio/laugh.ogg');
+        this.game.load.audio('sfxSnore', 'assets/audio/snore.ogg');
+        this.game.load.audio('sfxUnimpressed', 'assets/audio/unimpressed.ogg');
+        this.game.load.audio('sfxFailed', 'assets/audio/you-have-failed.ogg');
+        this.game.load.audio('sfxBoo', 'assets/audio/boo.ogg');
     },
     
     create: function(){
