@@ -1,8 +1,8 @@
 var gameMain = function(game){
     var sounds;
-    var interstitial;
-    var banner;
-    var actions = 0;
+   // var interstitial;
+   // var banner;
+   // var actions = 0;
         
     multiSounds = false;
     randomTimer = false;
@@ -143,16 +143,14 @@ gameMain.prototype = {
 
         gearBtn = this.add.sprite(240, 190,'gear');
         gearBtn.alpha = 0.7;
-        gearBtn.scale.set(0.9,0.9);
         
         knowBtn = this.add.sprite(547, 240,'bulb');
         knowBtn.alpha = 0.7;
-        knowBtn.scale.set(0.9,0.9);
         knowBtn.anchor.set(0.5,0.5);
 
         game.add.tween(knowBtn.scale).to( { x: 1.001, y: 1.001 }, 5000, "Sine.easeInOut", true, 0, -1, true);
 
-        try{
+       /* try{
             Cocoon.Ad.AdMob.configure({
                 android: { 
                     banner:"ca-app-pub-9795366520625065/3578360636",
@@ -168,7 +166,7 @@ gameMain.prototype = {
 
             //banner.setLayout(Cocoon.Ad.AdMob.BannerLayout.BOTTOM_CENTER );
             //banner.setBannerLayout(Cocoon.Ad.AdMob.BannerLayout.BOTTOM_CENTER)
-        } catch(e){}
+        } catch(e){}*/
     },
 
     update: function(){
@@ -355,8 +353,10 @@ function openOptions(){
                 type: "image", content: "ok", offsetY: 100, offsetX: 300, contentScale: 0.5,
                 callback: function () {
                     modal.hideModal('options');
-                    banner.hide();
-                    addAction();
+                   /* try{
+                        banner.hide();
+                    } catch(e){}
+                    addAction();*/
                     
                     button7.inputEnabled = true;
                 }
@@ -365,8 +365,11 @@ function openOptions(){
    });
    
    modal.showModal("options"); 
-   banner.show();
-   
+  
+   /*try{
+       banner.show();
+   } catch(e){}
+   */
    if (multiSounds) modal.getModalItem('options',15).tint = 0x00ff00;
    
    if (mode == 'toggle') modal.getModalItem('options',4).tint = 0x00ff00;
@@ -434,7 +437,7 @@ function didYouKnow(){
     'Notation of the drum que:', 'Indie developers love\nto get good ratings!', 
     'Gate mode - the sound\n will play as long as\n you press the button', 
     'Trigger mode - The sound\nwill restart when you\npress the button',
-    'Pause mode - The sound\nwill pause / resume\n when you press',
+    'Pause mode - The sound\nwill pause / resume\n when you press the button',
     'In multichannel mode\nyou can play many sounds\nat the same time!',
     "\"Never look at the\nTrombones, you'll only\nencourage them\"\n(R.Strauss)",
     "\"I don't know why\nbut the trombone makes\nme very uncomfortable\"\n(S.Freud)",
@@ -452,7 +455,7 @@ function didYouKnow(){
     "Set the timer to '???s'\nto play the sound\nat a random time\nbetween 2 & 60 seconds",
     "Atychiphobia - \nThe fear of failure",
     "Everybody fails",
-    "I won't ask you\nto click the ads\nif you like this app\ncause that would be\nunethical",
+    "This app is free\nand does not include ads.\nYou could rate it though.\n:)",
     "\"Success is most often\nachieved by those\nwho don't know that\nfailure is inevitable.\"\n(Coco Chanel)",
     "\"We are all failures - \nat least the best\nof us are\"\n(J.M. Barrie)",
     "cricket chirps are more frequent\nin higher temperature"
@@ -501,7 +504,7 @@ function tweenDidYouKnow(thing){
         }, didYouKnows[rndDidYouKnow].length * 60); 
     });    
 }
-
+/*
 function addAction(){
    actions++;
    if (actions >= 14){
@@ -517,4 +520,4 @@ function addAction(){
            }, 2000);
        }
    }
-}
+}*/
