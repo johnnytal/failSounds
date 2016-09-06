@@ -213,7 +213,7 @@ function playSound(sound, button, color1, color2){
         }, this);
         
         game.stage.backgroundColor = color2;
-        addAction();
+        //addAction();
     } 
     else{
         if (mode == 'toggle'){
@@ -499,7 +499,7 @@ function tweenDidYouKnow(thing){
                 thing.destroy();
                 button8.inputEnabled = true;
                 
-                addAction();
+                //addAction();
             });
         }, didYouKnows[rndDidYouKnow].length * 60); 
     });    
