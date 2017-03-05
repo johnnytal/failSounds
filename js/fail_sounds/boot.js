@@ -1,5 +1,5 @@
-//document.addEventListener("deviceready", start, false);
-window.onload = start;
+document.addEventListener("deviceready", start, false);
+//window.onload = start;
 
 function start(){   
     game = new Phaser.Game(850, 480, Phaser.CANVAS, "");    
