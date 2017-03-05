@@ -1,9 +1,7 @@
 var gameMain = function(game){
     var sounds;
-   // var interstitial;
-   // var banner;
-   // var actions = 0;
-        
+    var interstitial;
+   
     multiSounds = false;
     randomTimer = false;
     
@@ -150,23 +148,24 @@ gameMain.prototype = {
 
         game.add.tween(knowBtn.scale).to( { x: 1.001, y: 1.001 }, 5000, "Sine.easeInOut", true, 0, -1, true);
 
-       /* try{
+        try{
             Cocoon.Ad.AdMob.configure({
                 android: { 
-                    banner:"ca-app-pub-9795366520625065/3578360636",
-                    interstitial:"ca-app-pub-9795366520625065/1704674634"
+                    //banner:"ca-app-pub-9795366520625065/3578360636",
+                    interstitial:"ca-app-pub-9795366520625065/5684268235"
                 }
             });
 
             interstitial = Cocoon.Ad.AdMob.createInterstitial();
             interstitial.load();
             
-            banner = Cocoon.Ad.AdMob.createBanner();
-            banner.load();
+            /*banner = Cocoon.Ad.AdMob.createBanner();
+            banner.load();*/
 
             //banner.setLayout(Cocoon.Ad.AdMob.BannerLayout.BOTTOM_CENTER );
             //banner.setBannerLayout(Cocoon.Ad.AdMob.BannerLayout.BOTTOM_CENTER)
-        } catch(e){}*/
+            
+        } catch(e){}
     },
 
     update: function(){
@@ -340,11 +339,11 @@ function openOptions(){
             },
             
             {
-                type: "text", content: "Click here to rate!", fontSize: 16, color: '0x0000ff', fontFamily: "Luckiest Guy",
-                offsetY: 150, offsetX: -290,
+                type: "text", content: "Support by watching an ad", fontSize: 21, color: '0x0000ff', fontFamily: "Luckiest Guy",
+                offsetY: 150, offsetX: 0, stroke: "0xffffff", strokeThickness: 2, 
 
                 callback: function () {
-                    window.open('market://details?id=com.com.johnnytal_failSounds');
+                    support();
                 }
             },
             
@@ -353,11 +352,6 @@ function openOptions(){
                 type: "image", content: "ok", offsetY: 100, offsetX: 300, contentScale: 0.5,
                 callback: function () {
                     modal.hideModal('options');
-                   /* try{
-                        banner.hide();
-                    } catch(e){}
-                    addAction();*/
-                    
                     button7.inputEnabled = true;
                 }
             },
@@ -365,11 +359,7 @@ function openOptions(){
    });
    
    modal.showModal("options"); 
-  
-   /*try{
-       banner.show();
-   } catch(e){}
-   */
+
    if (multiSounds) modal.getModalItem('options',15).tint = 0x00ff00;
    
    if (mode == 'toggle') modal.getModalItem('options',4).tint = 0x00ff00;
@@ -434,7 +424,7 @@ function didYouKnow(){
     button8.inputEnabled = false;
 
     didYouKnows = ["Never push the red button", 'A short sequence played\nfor punctuation is called\na "Sting"',
-    'Notation of the drum que:', 'Indie developers love\nto get good ratings!', 
+    'Notation of the drum que:', 'If you like this app\nyou can support it\nby watching an ad! (?)', 
     'Gate mode - the sound\n will play as long as\n you press the button', 
     'Trigger mode - The sound\nwill restart when you\npress the button',
     'Pause mode - The sound\nwill pause / resume\n when you press the button',
@@ -461,7 +451,7 @@ function didYouKnow(){
     "cricket chirps are more frequent\nin higher temperature"
     ];
 
-    rndDidYouKnow = game.rnd.integerInRange(0, didYouKnows.length - 1);
+    rndDidYouKnow = game.rnd.integerInRange(0, didYouKnows.length-1);
     
     if (rndDidYouKnow == 0){
         redBtn = game.add.button(345, 200, 'button');
@@ -504,6 +494,11 @@ function tweenDidYouKnow(thing){
         }, didYouKnows[rndDidYouKnow].length * 60); 
     });    
 }
+
+function support(){
+    interstitial.show();
+}
+
 /*
 function addAction(){
    actions++;
