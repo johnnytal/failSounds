@@ -27,5 +27,9 @@
 	</head>
 	<body style="margin: 0;">
 	    <div></div>
+	    <div>
+	    	<button style="height:100px;" onclick="window.plugins.socialsharing.canShareVia('whatsapp', 'msg', null, null, null, function(e){alert(e)}, function(e){alert(e)})">is WhatsApp available?</button>
+	    	<button style="height:100px;" onclick="window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', 'subject', 'assets/fail_sounds/audio/boing.ogg', function() {alert('share ok')}, function(errormsg){alert(errormsg)})">msg via WhatsApp (with errcallback)</button>
+	    </div>
 	</body>
 </html> 
