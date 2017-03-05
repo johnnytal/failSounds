@@ -84,9 +84,7 @@ gameMain.prototype = {
             sfxBoo = game.add.audio('sfxBoo')
         ];
         
-        randomColors = [
-            '#000055', '#00ff00', '#f3fff5', '#00ffff', '#000000', '#ffd00f'
-        ];
+        randomColors = ['#000055', '#00ff00', '#f3fff5', '#00ffff', '#000000', '#ffd00f'];
 
         modal = new gameModal(game);
         
@@ -150,21 +148,13 @@ gameMain.prototype = {
 
         try{
             Cocoon.Ad.AdMob.configure({
-                android: { 
-                    //banner:"ca-app-pub-9795366520625065/3578360636",
+                android: {
                     interstitial:"ca-app-pub-9795366520625065/5684268235"
                 }
             });
 
             interstitial = Cocoon.Ad.AdMob.createInterstitial();
             interstitial.load();
-            
-            /*banner = Cocoon.Ad.AdMob.createBanner();
-            banner.load();*/
-
-            //banner.setLayout(Cocoon.Ad.AdMob.BannerLayout.BOTTOM_CENTER );
-            //banner.setBannerLayout(Cocoon.Ad.AdMob.BannerLayout.BOTTOM_CENTER)
-            
         } catch(e){}
     },
 
@@ -212,7 +202,6 @@ function playSound(sound, button, color1, color2){
         }, this);
         
         game.stage.backgroundColor = color2;
-        //addAction();
     } 
     else{
         if (mode == 'toggle'){
@@ -488,8 +477,6 @@ function tweenDidYouKnow(thing){
             tweenY2.onComplete.add(function(){ 
                 thing.destroy();
                 button8.inputEnabled = true;
-                
-                //addAction();
             });
         }, didYouKnows[rndDidYouKnow].length * 60); 
     });    
@@ -498,21 +485,3 @@ function tweenDidYouKnow(thing){
 function support(){
     interstitial.show();
 }
-
-/*
-function addAction(){
-   actions++;
-   if (actions >= 14){
-       actions = 0;
-       
-       try{
-           interstitial.show();
-       } catch(e){
-           setTimeout(function(){
-               try{
-                   interstitial.show();
-               } catch(e){}  
-           }, 2000);
-       }
-   }
-}*/

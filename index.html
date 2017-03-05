@@ -1,8 +1,7 @@
 <!doctype html>
 <html>
 	<head>
-	    <meta name="viewport" 
-	    content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height"/>
+	    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height"/>
 
 	    <style>
 	    	@font-face {
@@ -11,18 +10,21 @@
 			}
 			
 			body{
-				background-color: #f6f6f6;
+				margin: 0;
 			}
 		</style>
 		
-	    <!--<script type="text/javascript" src="cordova.js"></script>-->
 	    <script type="text/javascript" src="js/fail_sounds/phaser.min.js"></script>
 	    <script type="text/javascript" src="js/fail_sounds/modal.js"></script>
 	    <script type="text/javascript" src="js/fail_sounds/boot.js"></script>
 	    <script type="text/javascript" src="js/fail_sounds/preloader.js"></script>
 	    <script type="text/javascript" src="js/fail_sounds/main.js"></script>
 	</head>
-	<body style="margin: 0;">
+	<body>
 	    <div></div>
+	    <div>
+	    	<button style="height:100px;" onclick="window.plugins.socialsharing.canShareVia('whatsapp', 'msg', null, null, null, function(e){alert(e)}, function(e){alert(e)})">is WhatsApp available?</button>
+	    	<button style="height:100px;" onclick="window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', 'subject', 'assets/fail_sounds/audio/boing.ogg', function() {alert('share ok')}, function(errormsg){alert(errormsg)})">msg via WhatsApp (with errcallback)</button>
+	   </div>
 	</body>
 </html> 
